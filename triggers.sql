@@ -63,3 +63,23 @@ BEGIN
 	END IF;
 END; 
 /
+
+CREATE OR REPLACE TRIGGER contracte_data_inchiriere_trg 
+    BEFORE INSERT ON Contracte_inchirieri 
+    FOR EACH ROW 
+DECLARE
+    ultima_data_retur DATE;
+    v_nr_de_inchirieri NUMBER(4);
+BEGIN  
+    SELECT COUNT(*) INTO v_nr_de_inchirieri FROM Contracte_inchirieri WHERE id_masina = :new.id_masina;
+    IF v_nr_de_inchirieri > 0 
+    THEN
+        SELECT MAX(data_retur) INTO ultima_data_retur FROM Contracte_inchirieri WHERE id_masina = :new.id_masina;
+        IF (:new.data_inchiriere < ultima_data_retur)
+        THEN
+            RAISE_APPLICATION_ERROR( -20001,
+                    'Data invalida: ' || TO_CHAR( :new.data_inchiriere, 'DD.MM.YYYY' ) || ' trebuie sa fie mai mare decat data_retur anterioara.' );
+        END IF;
+    END IF;
+END; 
+/
