@@ -1,0 +1,85 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="067764B1-EB8A-BF9F-7AEA-BB13E17A5CD4" name="Masini">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<generatorID>5C9A4227-DA73-DE37-1B7C-C198A8EE8C30</generatorID>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_masina" id="90FD3277-0579-94BB-7A04-522200D182BD">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<generatorID>8A3FE9A1-94CD-01CA-9517-1901739F62CE</generatorID>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<ownDataTypeParameters>,4,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementMaxValue>9999</autoIncrementMaxValue>
+<autoIncrementCycle>false</autoIncrementCycle>
+<autoIncrementSequenceName>masini_id_masina_seq</autoIncrementSequenceName>
+<autoIncrementTriggerName>masini_id_masina_trg</autoIncrementTriggerName>
+</Column>
+<Column name="nr_inmatriculare" id="AA62EEBC-829E-B5C9-0675-24DAD85596B9">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<generatorID>D2E1996E-3CF4-7D5E-76F6-C07084630798</generatorID>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<constraintName>masini_nr_inmatriculare_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>9</dataTypeSize>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="length(nr_inmatriculare) = 9  AND regexp_like ( nr_inmatriculare,&apos;[A-Z_ ]{1,2}+[0-9_ ]{2,3}+[A-Z]{3}*$&apos; )"/>
+</checkConstraint>
+<ownDataTypeParameters>9,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="status" id="85912811-B396-3E34-A0C4-CD41B0F020C0">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<generatorID>BB9CE4F7-F6D1-5DCC-8143-AD13CF1B49B2</generatorID>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<listOfValues>
+<valueDef value="0" description=""/>
+<valueDef value="1" description=""/>
+</listOfValues>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="57FDA179-CD1E-6BFE-E78F-321EB6F5A197" name="Masini_PK">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<generatorID>E354C36E-06A0-D0B0-D38A-AC5A54B2A891</generatorID>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="90FD3277-0579-94BB-7A04-522200D182BD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EE7C3EA8-7822-DE81-332F-B715854D197E" name="masini_nr_inmatriculare_uk">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<generatorID>EDD6E9A7-1526-137F-8F79-2A0BEA9770F4</generatorID>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AA62EEBC-829E-B5C9-0675-24DAD85596B9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

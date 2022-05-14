@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="masini_contracte_inchirieri_FK" directorySegmentName="seg_0" id="94BA9C33-77FD-CFC3-FDFB-7236668ED15D">
+<createdBy>Cami</createdBy>
+<createdTime>2020-12-01 13:25:53 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<sourcePk>E354C36E-06A0-D0B0-D38A-AC5A54B2A891</sourcePk>
+<identifying>true</identifying>
+<nameOnSource>sunt inchiriate prin</nameOnSource>
+<nameOnTarget>inchiriaza</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>5C9A4227-DA73-DE37-1B7C-C198A8EE8C30</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>8E4468A2-78A8-3377-8949-FF93EC8B1A37</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

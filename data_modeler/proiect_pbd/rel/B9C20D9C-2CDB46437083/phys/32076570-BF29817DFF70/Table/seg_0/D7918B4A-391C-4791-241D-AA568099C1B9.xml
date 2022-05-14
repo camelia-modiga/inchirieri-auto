@@ -1,0 +1,63 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="Contracte_inchirieri" directorySegmentName="seg_0" id="D7918B4A-391C-4791-241D-AA568099C1B9">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="id_masina" id="0D4F91B7-33BB-999E-E25E-EAEFE14A14C2">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="data_inchiriere" id="38EB967B-F917-1564-A6E0-AC0DB2D6DC03">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="tarif" id="46B7861F-FF62-F3E8-46C5-A5A2F9C67CCC">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="id_client" id="904F9F94-2FA1-F215-9058-5FF63EEAEF34">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="nr_contract" id="ACDB2699-0035-F6CC-5D51-69374CF7797D">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="data_retur" id="C3429304-6138-5AE7-C8FA-62F87DA1B892">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="clienti_contracte_FK" id="1759742A-7E55-A368-0026-E6C27CC06AD5">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="masini_contracte_inchirieri_FK" id="C7492354-727D-FC82-7A50-6BFDA749CF56">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="Contracte_inchirieri_PK" id="B4AC0C36-8B11-08B5-36F0-16D9E302F173">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

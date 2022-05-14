@@ -1,0 +1,194 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="BFD7D022-CC53-F44D-6675-93B9C380EBEC" name="Detalii_masini">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:22:30 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="marca" id="C5D3F3CF-7AA0-CE15-CC5A-47E3B3C942DA">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:22:41 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<constraintName>detalii_masini_marca_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="length(marca) &gt;= 2  AND regexp_like ( marca, &apos;^[a-zA-Z ]*$&apos; ) "/>
+</checkConstraint>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="clasa" id="1386E480-4F2D-507C-54D1-B366E29406AC">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:22:57 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<constraintName>detalii_masini_clasa_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="length(clasa) &gt;= 2  AND regexp_like ( clasa, &apos;^[a-zA-Z ]*$&apos; ) "/>
+</checkConstraint>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="an_fabricatie" id="2D56ECA7-BF5F-62BE-2B26-6C5E15E6C0DD">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:23:18 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<constraintName>detalii_an_fabricatie_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<ownDataTypeParameters>,4,</ownDataTypeParameters>
+<listOfRanges>
+<rangeDef class="oracle.dbtools.crest.model.design.constraint.AVT">
+<beginValue>2010</beginValue>
+<endValue>2020</endValue>
+</rangeDef>
+</listOfRanges>
+</Attribute>
+<Attribute name="carburant" id="49896B2F-EBB4-76A2-8C0C-F725DE58E2E1">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:23:32 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<constraintName>detalii_masini_carburant_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<listOfValues>
+<valueDef value="benzina" description=""/>
+<valueDef value="motorina" description=""/>
+</listOfValues>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="culoare" id="3F779D80-7089-3A40-09E4-1CE610447D58">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:23:49 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<constraintName>detalii_masini_culoare_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="length(culoare) &gt;= 2  AND regexp_like ( culoare, &apos;^[a-zA-Z ]*$&apos; ) "/>
+</checkConstraint>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="transmisie" id="6B1D3B81-6B84-C00B-0620-63105A6ACCF3">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:24:11 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<constraintName>detalii_masini_transmisie_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<listOfValues>
+<valueDef value="automata" description=""/>
+<valueDef value="manuala" description=""/>
+</listOfValues>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="consum" id="392DB6DB-F166-6C50-2D0A-21219826B8C5">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:24:31 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<constraintName>detalii_masini_consum_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<dataTypeScale>1</dataTypeScale>
+<ownDataTypeParameters>,3,1</ownDataTypeParameters>
+<listOfRanges>
+<rangeDef class="oracle.dbtools.crest.model.design.constraint.AVT">
+<beginValue>3</beginValue>
+<endValue>15</endValue>
+</rangeDef>
+</listOfRanges>
+</Attribute>
+<Attribute name="tarif" id="3D65CF5B-B3BE-3EC5-DC19-18709131C117">
+<createdBy>Cami</createdBy>
+<createdTime>2020-12-01 18:36:14 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<constraintName>detalii_masini_tarif_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="tarif&gt;10"/>
+</checkConstraint>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_masina" id="1665B7CC-A2E6-F7B6-8E89-6CCB33288CA6">
+<createdBy>Cami</createdBy>
+<createdTime>2020-12-08 15:27:52 UTC</createdTime>
+<generatorID>7A397869-5E33-8FEC-65B2-5BFB017E7B6B</generatorID>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<referedAttribute>8A3FE9A1-94CD-01CA-9517-1901739F62CE</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<ownDataTypeParameters>,4,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="7696A418-8237-227C-1430-EED88B4AD2D0" name="Detalii_masini PK">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-30 17:30:34 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>1665B7CC-A2E6-F7B6-8E89-6CCB33288CA6</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="5D2A6874-9C42-DC5C-C989-9AE14037CB64" containerWithKeyObject="D7918B4A-391C-4791-241D-AA568099C1B9" localFKIndex="C7492354-727D-FC82-7A50-6BFDA749CF56" name="masini_contracte_inchirieri_FK">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<generatorID>94BA9C33-77FD-CFC3-FDFB-7236668ED15D</generatorID>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<referredTableLongName>Masini</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>067764B1-EB8A-BF9F-7AEA-BB13E17A5CD4</referredTableID>
+<keyObject>57FDA179-CD1E-6BFE-E78F-321EB6F5A197</keyObject>
+<referredKeyID>57FDA179-CD1E-6BFE-E78F-321EB6F5A197</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_masina</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

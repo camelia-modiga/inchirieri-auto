@@ -1,0 +1,220 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="91D5C910-326E-0EEA-48F3-77A278C09CE2" name="Clienti">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:26:08 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_client" id="926F1A39-CD7A-850E-6632-E96C52689821">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:26:34 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<ownDataTypeParameters>,4,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="serie_act_identitate" id="738CD822-8F1C-BFB3-3D6B-9FF3A039E2D0">
+<createdBy>Cami</createdBy>
+<createdTime>2020-12-08 17:30:11 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<constraintName>clienti_serie_act_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="regexp_like ( serie_act_identitate,&apos;^[A-Z0-9 ]*$&apos; )"/>
+</checkConstraint>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tip_act" id="D1D97652-1D37-269E-BBA6-565825A2280D">
+<createdBy>Cami</createdBy>
+<createdTime>2020-12-08 17:50:59 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<constraintName>clienti_ti_act_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<listOfValues>
+<valueDef value="Altele" description=""/>
+<valueDef value="CI" description=""/>
+<valueDef value="Pasaport" description=""/>
+</listOfValues>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nume" id="245635FA-852B-8F40-06BD-4A76F097502A">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:26:47 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<constraintName>clienti_nume_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="length(nume) &gt;= 2  AND regexp_like ( nume, &apos;^[a-zA-Z ]*$&apos; ) "/>
+</checkConstraint>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="prenume" id="EDA64D59-1E63-185A-B9B8-67D52E1DE710">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:27:02 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<constraintName>clienti_prenume_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="length(prenume) &gt;= 2  AND regexp_like ( prenume, &apos;^[a-zA-Z ]*$&apos; ) "/>
+</checkConstraint>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="email" id="7E910743-91EB-7E64-B178-195DD4537614">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:27:19 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<constraintName>clienti_email_ck</constraintName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40</dataTypeSize>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="regexp_like(email, &apos;[a-z0-9._%-]+@[a-z0-9._%-]+\.[a-z]{2,4}&apos;)"/>
+</checkConstraint>
+<ownDataTypeParameters>40,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nr_telefon" id="3CA825BA-0582-58A4-7B4B-1297D716C1BC">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:27:31 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<constraintName>clienti_nr_telefon_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="length(nr_telefon)=10  and regexp_like ( nr_telefon, &apos;^[0][:7:3:2][0-9 ]*$&apos; ) "/>
+</checkConstraint>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="data_obt_permis" id="3F1EDEC6-9909-FFBB-992E-53B7D3AE6FE0">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:27:53 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<constraintName>data_permis_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="data_obt_permis&gt;=add_months(data_nasterii, 12*18)"/>
+</checkConstraint>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="data_nasterii" id="04302CAE-24CD-0FE0-CD6D-A50FF5F0F539">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-20 05:57:50 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<avTSortOrder>1</avTSortOrder>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="29A0C53D-FEF8-B228-17FD-B3080F9BFC9E" name="Clienti PK">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:26:30 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>926F1A39-CD7A-850E-6632-E96C52689821</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="559F4E77-CA0D-C29A-A1BE-60A54F3F42AF" name="clienti_nr_telefon_uk">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 18:03:01 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="false"/>
+</engineerTo>
+<newElementsIDs>3CA825BA-0582-58A4-7B4B-1297D716C1BC</newElementsIDs>
+<usedAttributes>
+<attributeRef>3CA825BA-0582-58A4-7B4B-1297D716C1BC</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="ED6C580B-10BC-A323-CF6D-471AB3462DD4" name="clienti_serie_act_uk">
+<createdBy>Cami</createdBy>
+<createdTime>2020-12-08 17:35:28 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="false"/>
+</engineerTo>
+<newElementsIDs>738CD822-8F1C-BFB3-3D6B-9FF3A039E2D0</newElementsIDs>
+<usedAttributes>
+<attributeRef>738CD822-8F1C-BFB3-3D6B-9FF3A039E2D0</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="34D6DB06-A2EA-BE90-80E3-A733352D2FA1" name="clienti_email_uk">
+<createdBy>Cami</createdBy>
+<createdTime>2020-12-13 10:49:09 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="false"/>
+</engineerTo>
+<newElementsIDs>7E910743-91EB-7E64-B178-195DD4537614</newElementsIDs>
+<usedAttributes>
+<attributeRef>7E910743-91EB-7E64-B178-195DD4537614</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

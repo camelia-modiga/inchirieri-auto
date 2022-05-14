@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="proiect_pbd" id="2E83AD40-9B27-3922-BF83-A11E341EE993" version="3.5">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:21:14 UTC</createdTime>
+<ownerDesignName>proiect_bd-p</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>2E83AD40-9B27-3922-BF83-A11E341EE993</designId>
+</OSDM_Design>

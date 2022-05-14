@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="contracte_date_trg" directorySegmentName="seg_0" id="3C4730A7-7C95-A5FE-29B8-A5BEA06DC8E3">
+<createdBy>modig</createdBy>
+<createdTime>2022-04-29 18:51:08 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<actions>INSERT, UPDATE</actions>
+<body><![CDATA[BEGIN
+	IF( :new.data_inchiriere >= :new.data_retur )
+    THEN
+        RAISE_APPLICATION_ERROR( -20001,
+        'Data invalida: ' || TO_CHAR( :new.data_inchiriere, 'DD.MM.YYYY ' ) || ' trebuie sa fie mai mica decat ' || || TO_CHAR( :new.data_retur, 'DD.MM.YYYY ' ) );
+END IF;]]></body>
+<triggerTime>BEFORE</triggerTime>
+</TriggerOraclev10g>

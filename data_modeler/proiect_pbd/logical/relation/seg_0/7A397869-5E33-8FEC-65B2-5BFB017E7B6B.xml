@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="masini_detalii_masini" directorySegmentName="seg_0" id="7A397869-5E33-8FEC-65B2-5BFB017E7B6B">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-27 18:03:06 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<sourcePk>E354C36E-06A0-D0B0-D38A-AC5A54B2A891</sourcePk>
+<dominantRole>5C9A4227-DA73-DE37-1B7C-C198A8EE8C30</dominantRole>
+<identifying>true</identifying>
+<nameOnSource>au</nameOnSource>
+<nameOnTarget>sunt ale</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>5C9A4227-DA73-DE37-1B7C-C198A8EE8C30</sourceEntity>
+<targetCardinalityString>1</targetCardinalityString>
+<targetEntity>BFD7D022-CC53-F44D-6675-93B9C380EBEC</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

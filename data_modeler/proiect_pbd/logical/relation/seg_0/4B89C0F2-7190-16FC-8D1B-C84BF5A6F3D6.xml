@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="clienti_contracte_FK" directorySegmentName="seg_0" id="4B89C0F2-7190-16FC-8D1B-C84BF5A6F3D6">
+<createdBy>Cami</createdBy>
+<createdTime>2020-11-19 17:35:24 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<engineerTo>
+<item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
+</engineerTo>
+<sourcePk>29A0C53D-FEF8-B228-17FD-B3080F9BFC9E</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>au incheiat</nameOnSource>
+<nameOnTarget>sunt incheiate cu</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>91D5C910-326E-0EEA-48F3-77A278C09CE2</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>8E4468A2-78A8-3377-8949-FF93EC8B1A37</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
