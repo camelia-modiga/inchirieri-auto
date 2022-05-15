@@ -65,8 +65,7 @@ ALTER TABLE contracte_inchirieri
 
 ALTER TABLE contracte_inchirieri ADD CONSTRAINT contracte_inchirieri_tarif_ck CHECK ( tarif > 10 );
 
-ALTER TABLE contracte_inchirieri ADD CONSTRAINT contracte_inchirieri_pk PRIMARY KEY ( nr_contract,
-                                                                                      id_masina );
+ALTER TABLE contracte_inchirieri ADD CONSTRAINT contracte_inchirieri_pk PRIMARY KEY ( nr_contract);
 
 CREATE TABLE detalii_masini (
     marca         VARCHAR2(20) NOT NULL,
@@ -131,15 +130,15 @@ ALTER TABLE masini ADD CONSTRAINT masini_nr_inmatriculare_uk UNIQUE ( nr_inmatri
 
 ALTER TABLE contracte_inchirieri
     ADD CONSTRAINT clienti_contracte_fk FOREIGN KEY ( id_client )
-        REFERENCES clienti ( id_client );
+        REFERENCES clienti ( id_client ) ON DELETE CASCADE;
 
 ALTER TABLE contracte_inchirieri
     ADD CONSTRAINT masini_contracte_inchirieri_fk FOREIGN KEY ( id_masina )
-        REFERENCES masini ( id_masina );
+        REFERENCES masini ( id_masina ) ON DELETE CASCADE;
 
 ALTER TABLE detalii_masini
     ADD CONSTRAINT masini_detalii_masini FOREIGN KEY ( id_masina )
-        REFERENCES masini ( id_masina );
+        REFERENCES masini ( id_masina ) ON DELETE CASCADE;
 
 CREATE SEQUENCE clienti_id_client_seq 
 START WITH 1 

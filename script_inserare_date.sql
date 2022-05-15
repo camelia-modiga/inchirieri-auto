@@ -21,9 +21,6 @@ EXECUTE  MASINI_DETALII_PACK.ADD_MASINI('IS 19 RNT', 'skoda','premium',2016,'mot
 EXECUTE  MASINI_DETALII_PACK.ADD_MASINI('IS 20 RNT', 'mercedes','premium',2019,'benzina','maro','manuala',4.5,100);
 
 
---testare tranzactie
-EXECUTE  MASINI_DETALII_PACK.ADD_MASINI('IS 21 RNT', 'volkswagen','compact',2009,'benzina','negru','automata',4.9,22);
-
 --inserare date in tabela clienti
 EXECUTE CLIENTI_PACK.ADD_CLIENTI(null,'BV183916','CI','Popescu','Matei','popescumatei@yahoo.com','0786903009',to_date('10.03.2010','DD.MM.YYYY'),to_date('13.09.1973','DD.MM.YYYY'));
 EXECUTE CLIENTI_PACK.ADD_CLIENTI(null,'MX129056','CI','Pavel','Maria','maria.pavel@gmail.com','0750976725',to_date('01.03.2016','DD.MM.YYYY'),to_date('08.02.1990','DD.MM.YYYY'));
