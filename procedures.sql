@@ -197,3 +197,22 @@ CREATE OR REPLACE PACKAGE BODY VIZUALIZARE_PACK IS
     
 END VIZUALIZARE_PACK;
 /
+
+
+CREATE OR REPLACE PROCEDURE DELETE_MASINI (p_nr_inmatriculare in masini.nr_inmatriculare%TYPE)  AS 
+BEGIN
+    DELETE FROM MASINI WHERE nr_inmatriculare=p_nr_inmatriculare;
+    IF SQL%NOTFOUND THEN
+          dbms_output.put_line('Nu exista masina cu numarul de inmatriculare ' || p_nr_inmatriculare);
+    END IF;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE DELETE_CLIENTI (p_nume in clienti.nume%TYPE, p_prenume in clienti.prenume%TYPE)  AS 
+BEGIN
+    DELETE FROM CLIENTI WHERE nume = p_nume AND prenume = p_prenume;
+    IF SQL%NOTFOUND THEN
+          dbms_output.put_line('Nu exista clientul cu numele ' || p_nume || ' ' || p_prenume);
+    END IF;
+END;
+/
