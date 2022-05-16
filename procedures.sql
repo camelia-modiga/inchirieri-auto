@@ -1,7 +1,6 @@
 CREATE OR REPLACE PACKAGE CLIENTI_PACK
 IS
-    PROCEDURE ADD_CLIENTI (p_id_client in clienti.id_client%TYPE, 
-                           p_serie_act_identitate in clienti.serie_act_identitate%TYPE, 
+    PROCEDURE ADD_CLIENTI (p_serie_act_identitate in clienti.serie_act_identitate%TYPE, 
                            p_tip_act in clienti.tip_act%TYPE, 
                            p_nume in clienti.nume%TYPE, 
                            p_prenume in clienti.prenume%TYPE, 
