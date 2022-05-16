@@ -14,8 +14,7 @@ END CLIENTI_PACK;
 
 CREATE OR REPLACE PACKAGE BODY CLIENTI_PACK
 IS
-        PROCEDURE ADD_CLIENTI (p_id_client in clienti.id_client%TYPE, 
-                           p_serie_act_identitate in clienti.serie_act_identitate%TYPE, 
+        PROCEDURE ADD_CLIENTI (p_serie_act_identitate in clienti.serie_act_identitate%TYPE, 
                            p_tip_act in clienti.tip_act%TYPE, 
                            p_nume in clienti.nume%TYPE, 
                            p_prenume in clienti.prenume%TYPE, 
@@ -24,7 +23,7 @@ IS
                            p_data_obt_permis in clienti.data_obt_permis%TYPE, 
                            p_data_nasterii in clienti.data_nasterii%TYPE) IS 
     BEGIN  
-        INSERT INTO CLIENTI VALUES(p_id_client, p_serie_act_identitate, p_tip_act, p_nume, p_prenume, p_email, p_nr_telefon, p_data_obt_permis, p_data_nasterii);
+        INSERT INTO CLIENTI VALUES(null, p_serie_act_identitate, p_tip_act, p_nume, p_prenume, p_email, p_nr_telefon, p_data_obt_permis, p_data_nasterii);
     END ADD_CLIENTI;
     
 END CLIENTI_PACK;
