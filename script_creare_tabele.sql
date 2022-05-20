@@ -48,12 +48,12 @@ ALTER TABLE clienti ADD CONSTRAINT clienti_serie_act_uk UNIQUE ( serie_act_ident
 ALTER TABLE clienti ADD CONSTRAINT clienti_email_uk UNIQUE ( email );
 
 CREATE TABLE contracte_inchirieri (
-    nr_contract     NUMBER(4) NOT NULL,
-    data_inchiriere DATE NOT NULL,
-    data_retur      DATE NOT NULL,
-    tarif           NUMBER(4) NOT NULL,
-    id_client       NUMBER(4) NOT NULL,
-    id_masina       NUMBER(4) NOT NULL
+    nr_contract       NUMBER(4) NOT NULL,
+    data_inchiriere   DATE NOT NULL,
+    data_retur        DATE NOT NULL,
+    tarif             NUMBER(4) NOT NULL,
+    clienti_id_client NUMBER(4) NOT NULL,
+    masini_id_masina  NUMBER(4) NOT NULL
 );
 
 ALTER TABLE contracte_inchirieri
@@ -65,18 +65,19 @@ ALTER TABLE contracte_inchirieri
 
 ALTER TABLE contracte_inchirieri ADD CONSTRAINT contracte_inchirieri_tarif_ck CHECK ( tarif > 10 );
 
-ALTER TABLE contracte_inchirieri ADD CONSTRAINT contracte_inchirieri_pk PRIMARY KEY ( nr_contract);
+ALTER TABLE contracte_inchirieri ADD CONSTRAINT contracte_inchirieri_pk PRIMARY KEY ( nr_contract,
+                                                                                      masini_id_masina );
 
 CREATE TABLE detalii_masini (
-    marca         VARCHAR2(20) NOT NULL,
-    clasa         VARCHAR2(20) NOT NULL,
-    an_fabricatie NUMBER(4) NOT NULL,
-    carburant     VARCHAR2(10) NOT NULL,
-    culoare       VARCHAR2(10) NOT NULL,
-    transmisie    VARCHAR2(15) NOT NULL,
-    consum        NUMBER(3, 1) NOT NULL,
-    tarif         NUMBER(3) NOT NULL,
-    id_masina     NUMBER(4) NOT NULL
+    marca            VARCHAR2(20) NOT NULL,
+    clasa            VARCHAR2(20) NOT NULL,
+    an_fabricatie    NUMBER(4) NOT NULL,
+    carburant        VARCHAR2(10) NOT NULL,
+    culoare          VARCHAR2(10) NOT NULL,
+    transmisie       VARCHAR2(15) NOT NULL,
+    consum           NUMBER(3, 1) NOT NULL,
+    tarif            NUMBER(3) NOT NULL,
+    masini_id_masina NUMBER(4) NOT NULL
 );
 
 ALTER TABLE detalii_masini
@@ -108,12 +109,11 @@ ALTER TABLE detalii_masini
 
 ALTER TABLE detalii_masini ADD CONSTRAINT detalii_masini_tarif_ck CHECK ( tarif > 10 );
 
-ALTER TABLE detalii_masini ADD CONSTRAINT detalii_masini_pk PRIMARY KEY ( id_masina );
+ALTER TABLE detalii_masini ADD CONSTRAINT detalii_masini_pk PRIMARY KEY ( masini_id_masina );
 
 CREATE TABLE masini (
     id_masina        NUMBER(4) NOT NULL,
-    nr_inmatriculare VARCHAR2(9) NOT NULL,
-    status           NUMBER(1) NOT NULL
+    nr_inmatriculare VARCHAR2(9) NOT NULL
 );
 
 ALTER TABLE masini
@@ -121,24 +121,21 @@ ALTER TABLE masini
                                                       AND REGEXP_LIKE ( nr_inmatriculare,
                                                                         '[A-Z_ ]{1,2}+[0-9_ ]{2,3}+[A-Z]{3}*$' ) );
 
-ALTER TABLE masini
-    ADD CHECK ( status IN ( 0, 1 ) );
-
 ALTER TABLE masini ADD CONSTRAINT masini_pk PRIMARY KEY ( id_masina );
 
 ALTER TABLE masini ADD CONSTRAINT masini_nr_inmatriculare_uk UNIQUE ( nr_inmatriculare );
 
 ALTER TABLE contracte_inchirieri
-    ADD CONSTRAINT clienti_contracte_fk FOREIGN KEY ( id_client )
-        REFERENCES clienti ( id_client ) ON DELETE CASCADE;
+    ADD CONSTRAINT clienti_contracte_fk FOREIGN KEY ( clienti_id_client )
+        REFERENCES clienti ( id_client );
 
 ALTER TABLE contracte_inchirieri
-    ADD CONSTRAINT masini_contracte_inchirieri_fk FOREIGN KEY ( id_masina )
-        REFERENCES masini ( id_masina ) ON DELETE CASCADE;
+    ADD CONSTRAINT masini_contracte_inchirieri_fk FOREIGN KEY ( masini_id_masina )
+        REFERENCES masini ( id_masina );
 
 ALTER TABLE detalii_masini
-    ADD CONSTRAINT masini_detalii_masini FOREIGN KEY ( id_masina )
-        REFERENCES masini ( id_masina ) ON DELETE CASCADE;
+    ADD CONSTRAINT masini_detalii_masini FOREIGN KEY ( masini_id_masina )
+        REFERENCES masini ( id_masina );
 
 CREATE SEQUENCE clienti_id_client_seq 
 START WITH 1 
@@ -162,7 +159,7 @@ START WITH 1
     NOCACHE 
     ORDER ;
 
-CREATE OR REPLACE TRIGGER contracte_nr_contract_trq 
+CREATE OR REPLACE TRIGGER contracte_nr_contract_trg 
 BEFORE INSERT ON Contracte_inchirieri 
 FOR EACH ROW 
 WHEN (NEW.nr_contract IS NULL) 
@@ -172,18 +169,18 @@ BEGIN
 end;
 /
 
-CREATE SEQUENCE masini_id_masina_seq 
+CREATE SEQUENCE masini.id_masina_seq 
 START WITH 1 
     MAXVALUE 9999 
     NOCACHE 
     ORDER ;
 
-CREATE OR REPLACE TRIGGER masini_id_masina_trg 
+CREATE OR REPLACE TRIGGER masini.id_masina_trg 
 BEFORE INSERT ON Masini 
 FOR EACH ROW 
 WHEN (NEW.id_masina IS NULL) 
 BEGIN
-:new.id_masina := masini_id_masina_seq.nextval;
+:new.id_masina := masini.id_masina_seq.nextval;
 
 end;
 /

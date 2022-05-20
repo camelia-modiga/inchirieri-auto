@@ -1,16 +1,16 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D20346FA-39E7-2E9D-D6AE-2476126894BF" name="Detalii_masini">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C96C587F-1410-0A33-8F83-E9E1AEB4B361" name="Detalii_masini">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>BFD7D022-CC53-F44D-6675-93B9C380EBEC</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="marca" id="D10D4C52-5C1F-AEC0-91BB-69B3B06E8FFB">
+<Column name="marca" id="3C16655A-1EEE-99C6-5B1E-6B840EAF806E">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>C5D3F3CF-7AA0-CE15-CC5A-47E3B3C942DA</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>detalii_masini_marca_ck</constraintName>
@@ -24,9 +24,9 @@
 <ownDataTypeParameters>20,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="clasa" id="6FF6BAD7-1E80-E81A-9820-1359EF8F289A">
+<Column name="clasa" id="E4D3A22A-9686-3BA5-2247-358B1154477C">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>1386E480-4F2D-507C-54D1-B366E29406AC</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>detalii_masini_clasa_ck</constraintName>
@@ -40,9 +40,9 @@
 <ownDataTypeParameters>20,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="an_fabricatie" id="63ADE7B9-079B-7074-CA9D-134EB9EE2BAE">
+<Column name="an_fabricatie" id="6CE4AD48-05F5-04B6-FBA4-649F24DB1E4B">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>2D56ECA7-BF5F-62BE-2B26-6C5E15E6C0DD</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>detalii_an_fabricatie_ck</constraintName>
@@ -59,9 +59,9 @@
 </rangeDef>
 </listOfRanges>
 </Column>
-<Column name="carburant" id="34CC57D6-B276-897B-E51F-179E618B46F1">
+<Column name="carburant" id="69005A76-0E7F-BF89-67DD-056D2690FFD1">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>49896B2F-EBB4-76A2-8C0C-F725DE58E2E1</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>detalii_masini_carburant_ck</constraintName>
@@ -76,9 +76,9 @@
 <ownDataTypeParameters>10,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="culoare" id="4FD1F3D3-5756-EEEF-E3AB-BACD9A81A05D">
+<Column name="culoare" id="21D8F641-F6FC-91FA-E0C8-DAADF2A2DAFE">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>3F779D80-7089-3A40-09E4-1CE610447D58</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>detalii_masini_culoare_ck</constraintName>
@@ -92,9 +92,9 @@
 <ownDataTypeParameters>10,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="transmisie" id="CA0CB287-5D1E-22D8-4FF6-64C891525218">
+<Column name="transmisie" id="E24CBA57-B5FF-9D8E-668B-E6316FFD1DE3">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>6B1D3B81-6B84-C00B-0620-63105A6ACCF3</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>detalii_masini_transmisie_ck</constraintName>
@@ -109,9 +109,9 @@
 <ownDataTypeParameters>15,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="consum" id="0FC99D40-4281-E976-348B-348C7046C498">
+<Column name="consum" id="B7EBE94F-C99D-EF6A-B946-3158A0BDCB87">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>392DB6DB-F166-6C50-2D0A-21219826B8C5</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>detalii_masini_consum_ck</constraintName>
@@ -129,9 +129,9 @@
 </rangeDef>
 </listOfRanges>
 </Column>
-<Column name="tarif" id="07647D25-9547-8003-0A87-AA5FD2E7DE56">
+<Column name="tarif" id="6199A7BC-178B-BA07-8F0D-7475D9A30A80">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>3D65CF5B-B3BE-3EC5-DC19-18709131C117</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>detalii_masini_tarif_ck</constraintName>
@@ -145,9 +145,9 @@
 <ownDataTypeParameters>,3,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="id_masina" id="773FDF6F-8C67-227D-DC57-3F9C59BD76F4">
+<Column name="Masini_id_masina" id="52850ABA-5FDD-B0FC-35AA-8126878E404E">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>1665B7CC-A2E6-F7B6-8E89-6CCB33288CA6</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
@@ -158,32 +158,32 @@
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="FE5E0A18-FC17-D087-4813-5082C94E5E16" referredColumn="90FD3277-0579-94BB-7A04-522200D182BD"/>
+<colAssociation fkAssociation="1C76CBAE-A736-86A3-860B-CCBC5A7AFABF" referredColumn="FBA89186-1FF0-FF37-081C-3D17DBB07949"/>
 </associations>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="494FE5E2-7DB3-C52D-6D5E-945B49114BC7" name="Detalii_masini_PK">
+<ind_PK_UK id="AA999961-03FF-44A8-D821-8A25E22A0AA7" name="Detalii_masini_PK">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>7696A418-8237-227C-1430-EED88B4AD2D0</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <pk>true</pk>
 <indexState>Primary Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="773FDF6F-8C67-227D-DC57-3F9C59BD76F4"/>
+<colUsage columnID="52850ABA-5FDD-B0FC-35AA-8126878E404E"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="6D634DEB-4941-D49D-42AA-B0C52149FFFA" name="masini_detalii_masini">
+<ind_PK_UK id="8C1BB6DC-94D3-9041-AFFC-C9A0AF84A38B" name="masini_detalii_masini">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>7A397869-5E33-8FEC-65B2-5BFB017E7B6B</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="773FDF6F-8C67-227D-DC57-3F9C59BD76F4"/>
+<colUsage columnID="52850ABA-5FDD-B0FC-35AA-8126878E404E"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

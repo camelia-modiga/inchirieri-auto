@@ -1,16 +1,16 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="78EBB7CE-3925-CE3E-ED08-7C008F5F5C0A" name="Clienti">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="41ABC9B5-3BE2-95FB-E391-AE2F6FAFE1FA" name="Clienti">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>91D5C910-326E-0EEA-48F3-77A278C09CE2</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="id_client" id="9FE3BCAE-7992-7389-6487-AE8F20E4BF65">
+<Column name="id_client" id="A5CCE97A-3AA7-AB71-25D4-42FD65EE31A0">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>926F1A39-CD7A-850E-6632-E96C52689821</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
@@ -24,9 +24,9 @@
 <autoIncrementSequenceName>clienti_id_client_seq</autoIncrementSequenceName>
 <autoIncrementTriggerName>clienti_id_client_trg</autoIncrementTriggerName>
 </Column>
-<Column name="serie_act_identitate" id="0CD28F47-C184-3FE2-E1FC-CA45A43C95F0">
+<Column name="serie_act_identitate" id="E0199B7D-D619-1F25-E785-12C8ED44DFC7">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>738CD822-8F1C-BFB3-3D6B-9FF3A039E2D0</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>clienti_serie_act_ck</constraintName>
@@ -40,9 +40,9 @@
 <ownDataTypeParameters>20,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="tip_act" id="DEFB4901-E0CA-AF63-8D24-8E975D8A717A">
+<Column name="tip_act" id="F32192CF-E1CE-65BD-B5DF-774ACCB0BA5B">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>D1D97652-1D37-269E-BBA6-565825A2280D</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>clienti_ti_act_ck</constraintName>
@@ -58,9 +58,9 @@
 <ownDataTypeParameters>15,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="nume" id="35F776DC-FC2A-7EA1-E07D-87DA57C66C5D">
+<Column name="nume" id="CEBB6EB9-0149-4E46-0D62-C78D1C144394">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>245635FA-852B-8F40-06BD-4A76F097502A</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>clienti_nume_ck</constraintName>
@@ -74,9 +74,9 @@
 <ownDataTypeParameters>20,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="prenume" id="3C23EECC-5464-7490-07D2-254C9C5C43A3">
+<Column name="prenume" id="C7A2E82A-35E1-47D4-75A1-4600B4745CBF">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>EDA64D59-1E63-185A-B9B8-67D52E1DE710</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>clienti_prenume_ck</constraintName>
@@ -90,9 +90,9 @@
 <ownDataTypeParameters>20,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="email" id="8D993E49-561E-95DB-4B87-3637252BFCC8">
+<Column name="email" id="B80F8F9E-6D12-AA18-DB27-FDD4A86E0797">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>7E910743-91EB-7E64-B178-195DD4537614</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>clienti_email_ck</constraintName>
@@ -107,9 +107,9 @@
 <ownDataTypeParameters>40,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="nr_telefon" id="EA1EABBF-3231-1B5A-F8B8-A27793B8CC48">
+<Column name="nr_telefon" id="C2970233-75F7-744A-53D1-7DAAEDCA1D9F">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>3CA825BA-0582-58A4-7B4B-1297D716C1BC</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>clienti_nr_telefon_ck</constraintName>
@@ -123,9 +123,9 @@
 <ownDataTypeParameters>10,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="data_obt_permis" id="B69D0702-7445-6F6F-8846-C0F952CB653F">
+<Column name="data_obt_permis" id="BD93E466-714B-C207-3153-4694587339F7">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>3F1EDEC6-9909-FFBB-992E-53B7D3AE6FE0</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>data_permis_ck</constraintName>
@@ -138,9 +138,9 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="data_nasterii" id="D27FFDAB-7A51-40E0-1E54-A1ACA1AE8E2D">
+<Column name="data_nasterii" id="424048E6-475D-D0CC-C64D-E778825617A2">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>04302CAE-24CD-0FE0-CD6D-A50FF5F0F539</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
@@ -151,49 +151,49 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="DF1D13A9-EE6B-6E8C-D3D0-B34FE9ECE2D8" name="Clienti_PK">
+<ind_PK_UK id="E2851F47-E190-5BD9-802D-D87159C14B60" name="Clienti_PK">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>29A0C53D-FEF8-B228-17FD-B3080F9BFC9E</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <pk>true</pk>
 <indexState>Primary Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="9FE3BCAE-7992-7389-6487-AE8F20E4BF65"/>
+<colUsage columnID="A5CCE97A-3AA7-AB71-25D4-42FD65EE31A0"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="A5356F3C-BA02-04AF-1408-EF9E836695FF" name="clienti_nr_telefon_uk">
+<ind_PK_UK id="1F133D5A-2188-D10F-6979-E76F2969BC91" name="clienti_nr_telefon_uk">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>559F4E77-CA0D-C29A-A1BE-60A54F3F42AF</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <indexState>Unique Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="EA1EABBF-3231-1B5A-F8B8-A27793B8CC48"/>
+<colUsage columnID="C2970233-75F7-744A-53D1-7DAAEDCA1D9F"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="FAA089A9-79C2-1917-70D7-E485E40120C2" name="clienti_serie_act_uk">
+<ind_PK_UK id="0D5E7340-6B59-43B4-6646-4119E24EE9AB" name="clienti_serie_act_uk">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>ED6C580B-10BC-A323-CF6D-471AB3462DD4</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <indexState>Unique Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="0CD28F47-C184-3FE2-E1FC-CA45A43C95F0"/>
+<colUsage columnID="E0199B7D-D619-1F25-E785-12C8ED44DFC7"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="6CEF8159-E6A9-3E5A-6580-3C2D4FDF84E5" name="clienti_email_uk">
+<ind_PK_UK id="363E11B1-4079-74E9-0ADE-0E607CE20562" name="clienti_email_uk">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>34D6DB06-A2EA-BE90-80E3-A733352D2FA1</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <indexState>Unique Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="8D993E49-561E-95DB-4B87-3637252BFCC8"/>
+<colUsage columnID="B80F8F9E-6D12-AA18-DB27-FDD4A86E0797"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

@@ -1,16 +1,16 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D7918B4A-391C-4791-241D-AA568099C1B9" name="Contracte_inchirieri">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="321FFD99-630E-A25D-8C8B-6B6A3E3FCAFE" name="Contracte_inchirieri">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>8E4468A2-78A8-3377-8949-FF93EC8B1A37</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="nr_contract" id="ACDB2699-0035-F6CC-5D51-69374CF7797D">
+<Column name="nr_contract" id="D52D2FA5-FBEC-46ED-B71D-E1FF93B3D742">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>9E0244F1-BDBB-F8B9-EF8C-72BEA76997AB</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
@@ -22,11 +22,11 @@
 <autoIncrementMaxValue>9999</autoIncrementMaxValue>
 <autoIncrementCycle>false</autoIncrementCycle>
 <autoIncrementSequenceName>contracte_nr_contract_seq</autoIncrementSequenceName>
-<autoIncrementTriggerName>contracte_nr_contract_trq</autoIncrementTriggerName>
+<autoIncrementTriggerName>contracte_nr_contract_trg</autoIncrementTriggerName>
 </Column>
-<Column name="data_inchiriere" id="38EB967B-F917-1564-A6E0-AC0DB2D6DC03">
+<Column name="data_inchiriere" id="B4CB04F5-1CAC-EF83-6F8C-D3C4F9F8EB7F">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>DADFF600-41C7-CCDD-BC37-5AB02FA72361</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>contracte_data_inchiriere_ck</constraintName>
@@ -39,9 +39,9 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="data_retur" id="C3429304-6138-5AE7-C8FA-62F87DA1B892">
+<Column name="data_retur" id="0C62CF1F-8189-597B-EB1B-88295AC6844B">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>E6D0DAED-D6CB-77AB-C13F-4FD8B91A28CC</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>contracte_data_retur_ck</constraintName>
@@ -54,9 +54,9 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="tarif" id="46B7861F-FF62-F3E8-46C5-A5A2F9C67CCC">
+<Column name="tarif" id="3674F663-7B71-EC2D-85EA-068A85B1605C">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>E69488E2-BE8D-8DA9-7097-12D360C8658D</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>contracte_inchirieri_tarif_ck</constraintName>
@@ -70,9 +70,9 @@
 <ownDataTypeParameters>,4,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="id_client" id="904F9F94-2FA1-F215-9058-5FF63EEAEF34">
+<Column name="Clienti_id_client" id="83DD5FF7-EDFB-3168-EAAD-3F93B81804B6">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>2736E488-591B-57A2-0BA3-4C7793F16764</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
@@ -83,12 +83,12 @@
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="FC9F4C0F-0073-EB79-BEEB-03491C190B64" referredColumn="9FE3BCAE-7992-7389-6487-AE8F20E4BF65"/>
+<colAssociation fkAssociation="92821F57-7113-F40B-D072-7BC80485C0D2" referredColumn="A5CCE97A-3AA7-AB71-25D4-42FD65EE31A0"/>
 </associations>
 </Column>
-<Column name="id_masina" id="0D4F91B7-33BB-999E-E25E-EAEFE14A14C2">
+<Column name="Masini_id_masina" id="DBD2830C-F29B-8735-A1CB-4BE965898A0C">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>F639426C-822C-6841-9659-908E4224A232</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
@@ -99,44 +99,44 @@
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="5D2A6874-9C42-DC5C-C989-9AE14037CB64" referredColumn="90FD3277-0579-94BB-7A04-522200D182BD"/>
+<colAssociation fkAssociation="5621B26A-8177-70FA-D1F8-E0425A8B5C1D" referredColumn="FBA89186-1FF0-FF37-081C-3D17DBB07949"/>
 </associations>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="B4AC0C36-8B11-08B5-36F0-16D9E302F173" name="Contracte_inchirieri_PK">
+<ind_PK_UK id="2E2F095C-4DB4-6321-6639-B8710D89114A" name="Contracte_inchirieri_PK">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>9A43E13E-F938-18E3-E4D1-CFC979FABAD4</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <pk>true</pk>
 <indexState>Primary Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="ACDB2699-0035-F6CC-5D51-69374CF7797D"/>
-<colUsage columnID="0D4F91B7-33BB-999E-E25E-EAEFE14A14C2"/>
+<colUsage columnID="D52D2FA5-FBEC-46ED-B71D-E1FF93B3D742"/>
+<colUsage columnID="DBD2830C-F29B-8735-A1CB-4BE965898A0C"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="1759742A-7E55-A368-0026-E6C27CC06AD5" name="clienti_contracte_FK">
+<ind_PK_UK id="1D218F3C-C08E-3E39-2096-99D00B29768A" name="clienti_contracte_FK">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>4B89C0F2-7190-16FC-8D1B-C84BF5A6F3D6</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="904F9F94-2FA1-F215-9058-5FF63EEAEF34"/>
+<colUsage columnID="83DD5FF7-EDFB-3168-EAAD-3F93B81804B6"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="C7492354-727D-FC82-7A50-6BFDA749CF56" name="masini_contracte_inchirieri_FK">
+<ind_PK_UK id="F3382636-3F32-BEAD-60DB-C2B8EC5EECC4" name="masini_contracte_inchirieri_FK">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-14 07:29:05 UTC</createdTime>
+<createdTime>2022-05-20 13:27:10 UTC</createdTime>
 <generatorID>94BA9C33-77FD-CFC3-FDFB-7236668ED15D</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="0D4F91B7-33BB-999E-E25E-EAEFE14A14C2"/>
+<colUsage columnID="DBD2830C-F29B-8735-A1CB-4BE965898A0C"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

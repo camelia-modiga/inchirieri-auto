@@ -64,7 +64,7 @@ BEGIN
 END; 
 /
 
-CREATE OR REPLACE TRIGGER contracte_data_inchiriere_trg 
+create or replace NONEDITIONABLE TRIGGER contracte_data_inchiriere_trg 
     BEFORE INSERT ON Contracte_inchirieri 
     FOR EACH ROW 
 DECLARE
@@ -78,8 +78,7 @@ BEGIN
         IF (:new.data_inchiriere < ultima_data_retur)
         THEN
             RAISE_APPLICATION_ERROR( -20001,
-                    'Data invalida: ' || TO_CHAR( :new.data_inchiriere, 'DD.MM.YYYY' ) || ' trebuie sa fie mai mare decat data_retur anterioara.' );
+                    'Data invalida: ' || TO_CHAR( :new.data_inchiriere, 'DD.MM.YYYY' ) || '. Masina este inchiriata pana la data ' || TO_CHAR(ultima_data_retur,'DD.MM.YYYY'));
         END IF;
     END IF;
-END; 
-/
+END;
