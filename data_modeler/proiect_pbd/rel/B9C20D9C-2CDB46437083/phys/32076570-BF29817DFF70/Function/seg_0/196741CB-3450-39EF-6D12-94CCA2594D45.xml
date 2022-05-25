@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FunctionOracle class="oracle.dbtools.crest.model.design.storage.oracle.FunctionOracle" name="GET_ID_MASINA" directorySegmentName="seg_0" id="196741CB-3450-39EF-6D12-94CCA2594D45">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-25 14:00:06 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<source>CREATE OR REPLACE FUNCTION GET_ID_MASINA (p_nr_inmatriculare IN masini.nr_inmatriculare%TYPE) 
+RETURN NUMBER IS
+ v_id masini.id_masina%TYPE;
+    BEGIN
+   SELECT id_masina INTO v_id FROM masini WHERE nr_inmatriculare = p_nr_inmatriculare;
+      RETURN v_id;
+END GET_ID_MASINA;</source>
+</FunctionOracle>

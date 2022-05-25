@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="contracte_data_inchiriere_trg" directorySegmentName="seg_0" id="0F8CBF8A-DFF5-0BB1-AF20-BF4653760F82">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-25 14:20:59 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<actions>INSERT</actions>
+<body><![CDATA[DECLARE
+    ultima_data_retur DATE;
+    v_nr_de_inchirieri NUMBER(4);
+BEGIN  
+    SELECT COUNT(*) INTO v_nr_de_inchirieri FROM Contracte_inchirieri WHERE id_masina = :new.id_masina;
+    IF v_nr_de_inchirieri > 0 
+    THEN
+        SELECT MAX(data_retur) INTO ultima_data_retur FROM Contracte_inchirieri WHERE id_masina = :new.id_masina;
+        IF (:new.data_inchiriere < ultima_data_retur)
+        THEN
+           RAISE_APPLICATION_ERROR( -20001,
+                    'Data invalida: ' || TO_CHAR( :new.data_inchiriere, 'DD.MM.YYYY' ) || '. Masina este inchiriata pana la data ' || TO_CHAR(ultima_data_retur,'DD.MM.YYYY'));
+        END IF;
+    END IF;
+END; ]]></body>
+<triggerTime>BEFORE</triggerTime>
+<table>DD44F6B7-5E2A-6D7B-605D-988C3B306F96</table>
+</TriggerOraclev10g>

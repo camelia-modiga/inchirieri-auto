@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<StoredProcedureOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.StoredProcedureOraclev10g" name="DELETE_MASINI" directorySegmentName="seg_0" id="E9763947-B8F7-E753-3356-CE6B1387BE8F">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-25 14:08:09 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<source>CREATE OR REPLACE PROCEDURE DELETE_MASINI (p_nr_inmatriculare in masini.nr_inmatriculare%TYPE)  AS 
+BEGIN
+    DELETE FROM MASINI WHERE nr_inmatriculare=p_nr_inmatriculare;
+    IF SQL%NOTFOUND THEN
+          dbms_output.put_line(&apos;Nu exista masina cu numarul de inmatriculare &apos; || p_nr_inmatriculare);
+    END IF;
+END;</source>
+</StoredProcedureOraclev10g>

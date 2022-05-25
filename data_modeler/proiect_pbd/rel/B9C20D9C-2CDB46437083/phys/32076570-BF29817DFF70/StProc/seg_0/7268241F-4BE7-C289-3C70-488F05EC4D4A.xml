@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<StoredProcedureOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.StoredProcedureOraclev10g" name="DELETE_CLIENTI" directorySegmentName="seg_0" id="7268241F-4BE7-C289-3C70-488F05EC4D4A">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-25 14:08:33 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<source>CREATE OR REPLACE PROCEDURE DELETE_CLIENTI (p_nume in clienti.nume%TYPE, p_prenume in clienti.prenume%TYPE)  AS 
+BEGIN
+    DELETE FROM CLIENTI WHERE nume = p_nume AND prenume = p_prenume;
+    IF SQL%NOTFOUND THEN
+          dbms_output.put_line(&apos;Nu exista clientul cu numele &apos; || p_nume || &apos; &apos; || p_prenume);
+    END IF;
+END;</source>
+</StoredProcedureOraclev10g>

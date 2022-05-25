@@ -1,0 +1,35 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<PackageOracle class="oracle.dbtools.crest.model.design.storage.oracle.PackageOracle" name="CLIENTI_PACK" directorySegmentName="seg_0" id="0823E4CC-B9AA-F64A-F530-4A8511971C4E">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-25 14:01:28 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<source>CREATE OR REPLACE PACKAGE CLIENTI_PACK
+IS
+    PROCEDURE ADD_CLIENTI (p_serie_act_identitate in clienti.serie_act_identitate%TYPE, 
+                           p_tip_act in clienti.tip_act%TYPE, 
+                           p_nume in clienti.nume%TYPE, 
+                           p_prenume in clienti.prenume%TYPE, 
+                           p_email in clienti.email%TYPE, 
+                           p_nr_telefon in clienti.nr_telefon%TYPE,
+                           p_data_obt_permis in clienti.data_obt_permis%TYPE, 
+                           p_data_nasterii in clienti.data_nasterii%TYPE);
+END CLIENTI_PACK;
+/
+
+CREATE OR REPLACE PACKAGE BODY CLIENTI_PACK
+IS
+        PROCEDURE ADD_CLIENTI (p_serie_act_identitate in clienti.serie_act_identitate%TYPE, 
+                           p_tip_act in clienti.tip_act%TYPE, 
+                           p_nume in clienti.nume%TYPE, 
+                           p_prenume in clienti.prenume%TYPE, 
+                           p_email in clienti.email%TYPE, 
+                           p_nr_telefon in clienti.nr_telefon%TYPE,
+                           p_data_obt_permis in clienti.data_obt_permis%TYPE, 
+                           p_data_nasterii in clienti.data_nasterii%TYPE) IS 
+    BEGIN  
+        INSERT INTO CLIENTI VALUES(null, p_serie_act_identitate, p_tip_act, p_nume, p_prenume, p_email, p_nr_telefon, p_data_obt_permis, p_data_nasterii);
+    END ADD_CLIENTI;
+    
+END CLIENTI_PACK;
+/</source>
+</PackageOracle>

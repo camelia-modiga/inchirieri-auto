@@ -8,7 +8,8 @@ CREATE TABLE clienti (
     nr_telefon           CHAR(10) NOT NULL,
     data_obt_permis      DATE NOT NULL,
     data_nasterii        DATE NOT NULL
-);
+)
+LOGGING;
 
 ALTER TABLE clienti
     ADD CONSTRAINT clienti_serie_act_ck CHECK ( REGEXP_LIKE ( serie_act_identitate,
@@ -47,38 +48,49 @@ ALTER TABLE clienti ADD CONSTRAINT clienti_serie_act_uk UNIQUE ( serie_act_ident
 
 ALTER TABLE clienti ADD CONSTRAINT clienti_email_uk UNIQUE ( email );
 
-CREATE TABLE contracte_inchirieri (
-    nr_contract       NUMBER(4) NOT NULL,
-    data_inchiriere   DATE NOT NULL,
-    data_retur        DATE NOT NULL,
-    tarif             NUMBER(4) NOT NULL,
-    clienti_id_client NUMBER(4) NOT NULL,
-    masini_id_masina  NUMBER(4) NOT NULL
-);
+CREATE OR REPLACE PACKAGE CLIENTI_PACK
+IS
+    PROCEDURE ADD_CLIENTI (p_serie_act_identitate in clienti.serie_act_identitate%TYPE, 
+                           p_tip_act in clienti.tip_act%TYPE, 
+                           p_nume in clienti.nume%TYPE, 
+                           p_prenume in clienti.prenume%TYPE, 
+                           p_email in clienti.email%TYPE, 
+                           p_nr_telefon in clienti.nr_telefon%TYPE,
+                           p_data_obt_permis in clienti.data_obt_permis%TYPE, 
+                           p_data_nasterii in clienti.data_nasterii%TYPE);
+END CLIENTI_PACK;
+/
 
-ALTER TABLE contracte_inchirieri
-    ADD CONSTRAINT contracte_data_inchiriere_ck CHECK ( to_char(data_inchiriere, 'YYYY-MM-DD') >= '2020-10-01' );
-
-ALTER TABLE contracte_inchirieri
-    ADD CONSTRAINT contracte_data_retur_ck CHECK ( data_retur > data_inchiriere
-                                                   AND data_retur < add_months(data_inchiriere, 1) );
-
-ALTER TABLE contracte_inchirieri ADD CONSTRAINT contracte_inchirieri_tarif_ck CHECK ( tarif > 10 );
-
-ALTER TABLE contracte_inchirieri ADD CONSTRAINT contracte_inchirieri_pk PRIMARY KEY ( nr_contract,
-                                                                                      masini_id_masina );
+CREATE OR REPLACE PACKAGE BODY CLIENTI_PACK
+IS
+        PROCEDURE ADD_CLIENTI (p_serie_act_identitate in clienti.serie_act_identitate%TYPE, 
+                           p_tip_act in clienti.tip_act%TYPE, 
+                           p_nume in clienti.nume%TYPE, 
+                           p_prenume in clienti.prenume%TYPE, 
+                           p_email in clienti.email%TYPE, 
+                           p_nr_telefon in clienti.nr_telefon%TYPE,
+                           p_data_obt_permis in clienti.data_obt_permis%TYPE, 
+                           p_data_nasterii in clienti.data_nasterii%TYPE) IS 
+    BEGIN  
+        INSERT INTO CLIENTI VALUES(null, p_serie_act_identitate, p_tip_act, p_nume, p_prenume, p_email, p_nr_telefon, p_data_obt_permis, p_data_nasterii);
+    END ADD_CLIENTI;
+    
+END CLIENTI_PACK;
+/
+/
 
 CREATE TABLE detalii_masini (
-    marca            VARCHAR2(20) NOT NULL,
-    clasa            VARCHAR2(20) NOT NULL,
-    an_fabricatie    NUMBER(4) NOT NULL,
-    carburant        VARCHAR2(10) NOT NULL,
-    culoare          VARCHAR2(10) NOT NULL,
-    transmisie       VARCHAR2(15) NOT NULL,
-    consum           NUMBER(3, 1) NOT NULL,
-    tarif            NUMBER(3) NOT NULL,
-    masini_id_masina NUMBER(4) NOT NULL
-);
+    marca         VARCHAR2(20) NOT NULL,
+    clasa         VARCHAR2(20) NOT NULL,
+    an_fabricatie NUMBER(4) NOT NULL,
+    carburant     VARCHAR2(10) NOT NULL,
+    culoare       VARCHAR2(10) NOT NULL,
+    transmisie    VARCHAR2(15) NOT NULL,
+    consum        NUMBER(3, 1) NOT NULL,
+    tarif         NUMBER(3) NOT NULL,
+    id_masina     NUMBER(4) NOT NULL
+)
+LOGGING;
 
 ALTER TABLE detalii_masini
     ADD CONSTRAINT detalii_masini_marca_ck CHECK ( length(marca) >= 2
@@ -109,33 +121,319 @@ ALTER TABLE detalii_masini
 
 ALTER TABLE detalii_masini ADD CONSTRAINT detalii_masini_tarif_ck CHECK ( tarif > 10 );
 
-ALTER TABLE detalii_masini ADD CONSTRAINT detalii_masini_pk PRIMARY KEY ( masini_id_masina );
+ALTER TABLE detalii_masini ADD CONSTRAINT detalii_masini_pk PRIMARY KEY ( id_masina );
+
+CREATE TABLE contracte_inchirieri (
+    nr_contract     NUMBER(4) NOT NULL,
+    data_inchiriere DATE NOT NULL,
+    data_retur      DATE NOT NULL,
+    tarif           NUMBER(4) NOT NULL,
+    id_client       NUMBER(4) NOT NULL,
+    id_masina       NUMBER(4) NOT NULL
+)
+LOGGING;
+
+ALTER TABLE contracte_inchirieri
+    ADD CONSTRAINT contracte_data_inchiriere_ck CHECK ( to_char(data_inchiriere, 'YYYY-MM-DD') >= '2020-10-01' );
+
+ALTER TABLE contracte_inchirieri
+    ADD CONSTRAINT contracte_data_retur_ck CHECK ( data_retur > data_inchiriere
+                                                   AND data_retur < add_months(data_inchiriere, 1) );
+
+ALTER TABLE contracte_inchirieri ADD CONSTRAINT contracte_inchirieri_tarif_ck CHECK ( tarif > 10 );
+
+ALTER TABLE contracte_inchirieri ADD CONSTRAINT contracte_inchirieri_pk PRIMARY KEY ( nr_contract,
+                                                                                      id_masina );
 
 CREATE TABLE masini (
     id_masina        NUMBER(4) NOT NULL,
-    nr_inmatriculare VARCHAR2(9) NOT NULL
-);
+    nr_inmatriculare VARCHAR2(9) NOT NULL,
+    status           NUMBER(1) NOT NULL
+)
+LOGGING;
 
 ALTER TABLE masini
     ADD CONSTRAINT masini_nr_inmatriculare_ck CHECK ( length(nr_inmatriculare) = 9
                                                       AND REGEXP_LIKE ( nr_inmatriculare,
                                                                         '[A-Z_ ]{1,2}+[0-9_ ]{2,3}+[A-Z]{3}*$' ) );
 
+ALTER TABLE masini
+    ADD CONSTRAINT masini_status_ck CHECK ( status IN ( 0, 1 ) );
+
 ALTER TABLE masini ADD CONSTRAINT masini_pk PRIMARY KEY ( id_masina );
 
 ALTER TABLE masini ADD CONSTRAINT masini_nr_inmatriculare_uk UNIQUE ( nr_inmatriculare );
 
-ALTER TABLE contracte_inchirieri
-    ADD CONSTRAINT clienti_contracte_fk FOREIGN KEY ( clienti_id_client )
-        REFERENCES clienti ( id_client );
+CREATE OR REPLACE FUNCTION get_id_masina (
+    p_nr_inmatriculare IN masini.nr_inmatriculare%TYPE
+) RETURN NUMBER IS
+    v_id masini.id_masina%TYPE;
+BEGIN
+    SELECT
+        id_masina
+    INTO v_id
+    FROM
+        masini
+    WHERE
+        nr_inmatriculare = p_nr_inmatriculare;
+
+    RETURN v_id;
+END get_id_masina;
+/
+
+CREATE OR REPLACE FUNCTION get_id_client (
+    p_nume    IN clienti.nume%TYPE,
+    p_prenume IN clienti.prenume%TYPE
+) RETURN NUMBER IS
+    v_id clienti.id_client%TYPE;
+BEGIN
+    SELECT
+        id_client
+    INTO v_id
+    FROM
+        clienti
+    WHERE
+            nume = p_nume
+        AND prenume = p_prenume;
+
+    RETURN v_id;
+END get_id_client;
+/
+
+CREATE OR REPLACE PACKAGE CONTRACTE_PACK
+IS
+    PROCEDURE ADD_CONTRACTE (
+                             p_data_inchiriere in contracte_inchirieri.data_inchiriere%TYPE,
+                             p_data_retur in contracte_inchirieri.data_retur%TYPE,
+                             p_nume in clienti.nume%TYPE,
+                             p_prenume in clienti.prenume%TYPE,
+                             p_nr_inmatriculare in masini.nr_inmatriculare%TYPE
+                           );
+    PROCEDURE UPDATE_DATA_RETUR (
+                            p_nr_contract contracte_inchirieri.nr_contract%TYPE,
+                            p_data_retur in contracte_inchirieri.data_retur%TYPE,
+                            p_nr_inmatriculare in masini.nr_inmatriculare%TYPE
+    );
+END CONTRACTE_PACK;
+/
+
+CREATE OR REPLACE PACKAGE BODY CONTRACTE_PACK
+IS
+        PROCEDURE ADD_CONTRACTE (
+                             p_data_inchiriere in contracte_inchirieri.data_inchiriere%TYPE,
+                             p_data_retur in contracte_inchirieri.data_retur%TYPE,
+                             p_nume in clienti.nume%TYPE,
+                             p_prenume in clienti.prenume%TYPE,
+                             p_nr_inmatriculare in masini.nr_inmatriculare%TYPE) IS 
+        v_tarif detalii_masini.tarif%TYPE;
+        v_tarif_calculat contracte_inchirieri.tarif%TYPE := 0;
+       
+        CURSOR c_tarif is 
+            SELECT tarif FROM detalii_masini WHERE id_masina=GET_ID_MASINA(p_nr_inmatriculare);
+    
+    BEGIN  
+         OPEN c_tarif;
+             LOOP 
+                FETCH c_tarif INTO v_tarif;
+                EXIT WHEN c_tarif%NOTFOUND;
+                v_tarif_calculat := (p_data_retur - p_data_inchiriere) * v_tarif;
+                BEGIN 
+                    INSERT INTO contracte_inchirieri VALUES (null, p_data_inchiriere, p_data_retur, v_tarif_calculat, GET_ID_CLIENT(p_nume, p_prenume), GET_ID_MASINA(p_nr_inmatriculare)); 
+                    IF p_data_retur > SYSDATE THEN
+                      UPDATE masini SET status = 1 WHERE id_masina = (SELECT id_masina FROM masini WHERE nr_inmatriculare = p_nr_inmatriculare);
+                    END IF;
+                END;
+             END LOOP; 
+         CLOSE c_tarif; 
+    END ADD_CONTRACTE;
+    
+    PROCEDURE UPDATE_DATA_RETUR (
+                            p_nr_contract contracte_inchirieri.nr_contract%TYPE,
+                            p_data_retur in contracte_inchirieri.data_retur%TYPE,
+                            p_nr_inmatriculare in masini.nr_inmatriculare%TYPE) IS
+    ultima_data_retur contracte_inchirieri.data_retur%TYPE;
+    ultima_data_inchiriere contracte_inchirieri.data_inchiriere%TYPE;
+    numar_inchirieri NUMBER;
+    v_numar_contract contracte_inchirieri.nr_contract%TYPE;
+    masina_inchiriata EXCEPTION;
+    v_tarif detalii_masini.tarif%TYPE;
+    v_tarif_calculat contracte_inchirieri.tarif%TYPE := 0;
+       
+    CURSOR c_tarif is 
+        SELECT tarif FROM detalii_masini WHERE id_masina=GET_ID_MASINA(p_nr_inmatriculare);
+        
+    BEGIN
+        SELECT MAX(data_retur) INTO ultima_data_retur FROM contracte_inchirieri WHERE id_masina = GET_ID_MASINA(p_nr_inmatriculare);
+        SELECT MAX(data_inchiriere) INTO ultima_data_inchiriere FROM contracte_inchirieri WHERE id_masina = GET_ID_MASINA(p_nr_inmatriculare);
+        SELECT COUNT(*) INTO numar_inchirieri FROM contracte_inchirieri WHERE id_masina = GET_ID_MASINA(p_nr_inmatriculare);
+        SELECT nr_contract INTO v_numar_contract FROM contracte_inchirieri WHERE data_retur = ultima_data_retur ORDER BY nr_contract DESC;
+        OPEN c_tarif;
+            LOOP
+                FETCH c_tarif INTO v_tarif;
+                EXIT WHEN c_tarif%NOTFOUND;
+                v_tarif_calculat := (p_data_retur - ultima_data_inchiriere) * v_tarif;
+                BEGIN
+                    IF numar_inchirieri = 1 THEN 
+                        UPDATE contracte_inchirieri SET data_retur = p_data_retur,tarif = v_tarif_calculat WHERE nr_contract = p_nr_contract;
+                    END IF;
+                    IF numar_inchirieri > 1 THEN
+                        IF p_nr_contract = v_numar_contract THEN
+                            UPDATE contracte_inchirieri SET data_retur = p_data_retur,tarif = v_tarif_calculat WHERE nr_contract = p_nr_contract;
+                        END IF;
+                        IF p_data_retur > ultima_data_retur THEN 
+                            UPDATE contracte_inchirieri SET data_retur = p_data_retur,tarif = v_tarif_calculat WHERE nr_contract = p_nr_contract;
+                        ELSE 
+                            RAISE masina_inchiriata;
+                        END IF; 
+                    END IF;
+                EXCEPTION WHEN masina_inchiriata THEN
+                    dbms_output.put_line('Masina este deja inchiriata pana la data ' || ultima_data_retur);
+                END;
+            END LOOP;
+        CLOSE c_tarif;
+    END UPDATE_DATA_RETUR;
+                        
+END CONTRACTE_PACK;
+/
+/
+
+CREATE OR REPLACE PACKAGE MASINI_DETALII_PACK
+IS
+    PROCEDURE ADD_MASINI(   p_nr_inmatriculare in masini.nr_inmatriculare%TYPE,
+                            p_marca in detalii_masini.marca%TYPE,
+                            p_clasa in detalii_masini.clasa%TYPE,
+                            p_an_fabricatie in detalii_masini.an_fabricatie%TYPE,
+                            p_carburant in detalii_masini.carburant%TYPE,
+                            p_culoare in detalii_masini.culoare%TYPE, 
+                            p_transmisie in detalii_masini.transmisie%TYPE, 
+                            p_consum in detalii_masini.consum%TYPE, 
+                            p_tarif in detalii_masini.tarif%TYPE);
+
+END MASINI_DETALII_PACK;
+/
+
+CREATE OR REPLACE PACKAGE BODY MASINI_DETALII_PACK
+IS
+    PROCEDURE ADD_MASINI(   p_nr_inmatriculare in masini.nr_inmatriculare%TYPE,
+                            p_marca in detalii_masini.marca%TYPE,
+                            p_clasa in detalii_masini.clasa%TYPE,
+                            p_an_fabricatie in detalii_masini.an_fabricatie%TYPE,
+                            p_carburant in detalii_masini.carburant%TYPE,
+                            p_culoare in detalii_masini.culoare%TYPE, 
+                            p_transmisie in detalii_masini.transmisie%TYPE, 
+                            p_consum in detalii_masini.consum%TYPE, 
+                            p_tarif in detalii_masini.tarif%TYPE) IS 
+    BEGIN 
+
+        INSERT INTO MASINI VALUES(null, p_nr_inmatriculare, 0);
+        INSERT INTO DETALII_MASINI VALUES(p_marca,p_clasa,p_an_fabricatie,p_carburant,p_culoare,p_transmisie,p_consum,p_tarif,GET_ID_MASINA(p_nr_inmatriculare));
+        COMMIT;
+    END ADD_MASINI;
+
+END MASINI_DETALII_PACK;
+/
+/
+
+CREATE OR REPLACE PACKAGE VIZUALIZARE_PACK IS
+    --afiseaza numele si prenumele impreuna cu masina inchiriata de un anumit client
+    PROCEDURE AFISARE_INCHIRIERE;
+    --afiseaza toate inchirierile efectuate dupa data respectiva
+    PROCEDURE AFISARE_CONTRACTE_DATA(v_data contracte_inchirieri.data_inchiriere%TYPE);
+    --afisarea tuturor masinilor care nu sunt inchiriate
+    PROCEDURE AFISARE_MASINI_DISPONIBILE;
+END VIZUALIZARE_PACK;
+/
+
+
+CREATE OR REPLACE PACKAGE BODY VIZUALIZARE_PACK IS
+    PROCEDURE AFISARE_INCHIRIERE
+    IS 
+        CURSOR c1 IS SELECT DISTINCT nume,prenume,nr_inmatriculare FROM clienti,masini
+                    CROSS JOIN contracte_inchirieri WHERE clienti.id_client=contracte_inchirieri.id_client AND masini.id_masina=contracte_inchirieri.id_masina;
+    BEGIN
+        FOR i IN c1 LOOP
+            DBMS_OUTPUT.PUT_LINE('Clientul ' || i.nume || ' ' || i.prenume || ' a inchiriat masina ' || i.nr_inmatriculare );
+        END LOOP;
+    END AFISARE_INCHIRIERE;
+    
+    PROCEDURE AFISARE_CONTRACTE_DATA(v_data contracte_inchirieri.data_inchiriere%TYPE)
+    IS
+        CURSOR c2 IS SELECT masini.nr_inmatriculare,data_inchiriere FROM masini,contracte_inchirieri 
+                            WHERE masini.id_masina = contracte_inchirieri.id_masina AND data_inchiriere>v_data;
+    BEGIN
+        FOR i IN c2 LOOP
+            DBMS_OUTPUT.PUT_LINE('Masina ' || i.nr_inmatriculare || ' a fost inchiriata la data ' || i.data_inchiriere);
+        END LOOP;
+    END AFISARE_CONTRACTE_DATA;
+    
+    PROCEDURE AFISARE_MASINI_DISPONIBILE
+    IS
+        CURSOR c3 IS SELECT nr_inmatriculare FROM masini 
+                        WHERE id_masina NOT IN (SELECT id_masina FROM contracte_inchirieri WHERE data_retur >= SYSDATE) 
+                        ORDER BY id_masina;
+    BEGIN
+        FOR i IN c3 LOOP
+            DBMS_OUTPUT.PUT_LINE('Masina ' || i.nr_inmatriculare || ' nu este inchiriata');
+        END LOOP;
+    END AFISARE_MASINI_DISPONIBILE;    
+END VIZUALIZARE_PACK;
+/
+/
+
+CREATE OR REPLACE PROCEDURE DELETE_CLIENTI (p_nume in clienti.nume%TYPE, p_prenume in clienti.prenume%TYPE)  AS 
+BEGIN
+    DELETE FROM CLIENTI WHERE nume = p_nume AND prenume = p_prenume;
+    IF SQL%NOTFOUND THEN
+          dbms_output.put_line('Nu exista clientul cu numele ' || p_nume || ' ' || p_prenume);
+    END IF;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE DELETE_MASINI (p_nr_inmatriculare in masini.nr_inmatriculare%TYPE)  AS 
+BEGIN
+    DELETE FROM MASINI WHERE nr_inmatriculare=p_nr_inmatriculare;
+    IF SQL%NOTFOUND THEN
+          dbms_output.put_line('Nu exista masina cu numarul de inmatriculare ' || p_nr_inmatriculare);
+    END IF;
+END;
+/
 
 ALTER TABLE contracte_inchirieri
-    ADD CONSTRAINT masini_contracte_inchirieri_fk FOREIGN KEY ( masini_id_masina )
-        REFERENCES masini ( id_masina );
+    ADD CONSTRAINT clienti_contracte_fk FOREIGN KEY ( id_client )
+        REFERENCES clienti ( id_client )
+            ON DELETE CASCADE
+    NOT DEFERRABLE;
+
+ALTER TABLE contracte_inchirieri
+    ADD CONSTRAINT masini_contracte_inchirieri_fk FOREIGN KEY ( id_masina )
+        REFERENCES masini ( id_masina )
+            ON DELETE CASCADE
+    NOT DEFERRABLE;
 
 ALTER TABLE detalii_masini
-    ADD CONSTRAINT masini_detalii_masini FOREIGN KEY ( masini_id_masina )
-        REFERENCES masini ( id_masina );
+    ADD CONSTRAINT masini_detalii_masini FOREIGN KEY ( id_masina )
+        REFERENCES masini ( id_masina )
+    NOT DEFERRABLE;
+
+CREATE OR REPLACE TRIGGER contracte_data_inchiriere_trg 
+    BEFORE INSERT ON Contracte_inchirieri 
+    FOR EACH ROW 
+DECLARE
+    ultima_data_retur DATE;
+    v_nr_de_inchirieri NUMBER(4);
+BEGIN  
+    SELECT COUNT(*) INTO v_nr_de_inchirieri FROM Contracte_inchirieri WHERE id_masina = :new.id_masina;
+    IF v_nr_de_inchirieri > 0 
+    THEN
+        SELECT MAX(data_retur) INTO ultima_data_retur FROM Contracte_inchirieri WHERE id_masina = :new.id_masina;
+        IF (:new.data_inchiriere < ultima_data_retur)
+        THEN
+           RAISE_APPLICATION_ERROR( -20001,
+                    'Data invalida: ' || TO_CHAR( :new.data_inchiriere, 'DD.MM.YYYY' ) || '. Masina este inchiriata pana la data ' || TO_CHAR(ultima_data_retur,'DD.MM.YYYY'));
+        END IF;
+    END IF;
+END; 
+/
 
 CREATE SEQUENCE clienti_id_client_seq 
 START WITH 1 
@@ -143,7 +441,7 @@ START WITH 1
     NOCACHE 
     ORDER ;
 
-CREATE OR REPLACE TRIGGER clienti_id_client_trg 
+CREATE OR REPLACE TRIGGER client_id_client_trg 
 BEFORE INSERT ON Clienti 
 FOR EACH ROW 
 WHEN (NEW.id_client IS NULL) 
@@ -169,18 +467,18 @@ BEGIN
 end;
 /
 
-CREATE SEQUENCE masini.id_masina_seq 
+CREATE SEQUENCE masini_id_masina_seq 
 START WITH 1 
     MAXVALUE 9999 
     NOCACHE 
     ORDER ;
 
-CREATE OR REPLACE TRIGGER masini.id_masina_trg 
+CREATE OR REPLACE TRIGGER masini_id_masina_trg 
 BEFORE INSERT ON Masini 
 FOR EACH ROW 
 WHEN (NEW.id_masina IS NULL) 
 BEGIN
-:new.id_masina := masini.id_masina_seq.nextval;
+:new.id_masina := masini_id_masina_seq.nextval;
 
 end;
 /

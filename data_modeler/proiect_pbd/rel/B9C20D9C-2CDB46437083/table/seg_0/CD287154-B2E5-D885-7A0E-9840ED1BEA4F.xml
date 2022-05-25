@@ -1,16 +1,16 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="8EF808F9-0109-BB35-39BC-C191868B8349" name="Masini">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CD287154-B2E5-D885-7A0E-9840ED1BEA4F" name="Masini">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-20 13:27:10 UTC</createdTime>
+<createdTime>2022-05-25 13:50:32 UTC</createdTime>
 <generatorID>5C9A4227-DA73-DE37-1B7C-C198A8EE8C30</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="id_masina" id="FBA89186-1FF0-FF37-081C-3D17DBB07949">
+<Column name="id_masina" id="5ACF9B17-08D0-F80C-83FF-D5C41E4B3A21">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-20 13:27:10 UTC</createdTime>
+<createdTime>2022-05-25 13:50:32 UTC</createdTime>
 <generatorID>8A3FE9A1-94CD-01CA-9517-1901739F62CE</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
@@ -21,12 +21,12 @@
 <autoIncrementColumn>true</autoIncrementColumn>
 <autoIncrementMaxValue>9999</autoIncrementMaxValue>
 <autoIncrementCycle>false</autoIncrementCycle>
-<autoIncrementSequenceName>masini.id_masina_seq</autoIncrementSequenceName>
-<autoIncrementTriggerName>masini.id_masina_trg</autoIncrementTriggerName>
+<autoIncrementSequenceName>masini_id_masina_seq</autoIncrementSequenceName>
+<autoIncrementTriggerName>masini_id_masina_trg</autoIncrementTriggerName>
 </Column>
-<Column name="nr_inmatriculare" id="0D40BBBB-E3A5-942F-C70A-806E02A4E5B2">
+<Column name="nr_inmatriculare" id="83789B81-923F-0D24-1182-BA13CD95C12C">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-20 13:27:10 UTC</createdTime>
+<createdTime>2022-05-25 13:50:32 UTC</createdTime>
 <generatorID>D2E1996E-3CF4-7D5E-76F6-C07084630798</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <constraintName>masini_nr_inmatriculare_ck</constraintName>
@@ -40,29 +40,46 @@
 <ownDataTypeParameters>9,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="status" id="45C1FD91-D964-46AF-750C-4107CF61315A">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-25 13:50:32 UTC</createdTime>
+<generatorID>C38F6178-04A9-D69E-1E0E-5B1073B05084</generatorID>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<constraintName>masini_status_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<listOfValues>
+<valueDef value="0" description=""/>
+<valueDef value="1" description=""/>
+</listOfValues>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="624F4F51-DD17-1784-288D-F9CEB2A0CBED" name="Masini_PK">
+<ind_PK_UK id="E4D47B75-7635-9212-5EE4-0F7A64F9E6B2" name="Masini_PK">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-20 13:27:10 UTC</createdTime>
+<createdTime>2022-05-25 13:50:32 UTC</createdTime>
 <generatorID>E354C36E-06A0-D0B0-D38A-AC5A54B2A891</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <pk>true</pk>
 <indexState>Primary Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="FBA89186-1FF0-FF37-081C-3D17DBB07949"/>
+<colUsage columnID="5ACF9B17-08D0-F80C-83FF-D5C41E4B3A21"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="6E477B52-DA22-9318-E791-A0E73D91CE03" name="masini_nr_inmatriculare_uk">
+<ind_PK_UK id="627F561F-40D9-67B4-954A-0783DEA0A3D9" name="masini_nr_inmatriculare_uk">
 <createdBy>modig</createdBy>
-<createdTime>2022-05-20 13:27:10 UTC</createdTime>
+<createdTime>2022-05-25 13:50:32 UTC</createdTime>
 <generatorID>EDD6E9A7-1526-137F-8F79-2A0BEA9770F4</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <indexState>Unique Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="0D40BBBB-E3A5-942F-C70A-806E02A4E5B2"/>
+<colUsage columnID="83789B81-923F-0D24-1182-BA13CD95C12C"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

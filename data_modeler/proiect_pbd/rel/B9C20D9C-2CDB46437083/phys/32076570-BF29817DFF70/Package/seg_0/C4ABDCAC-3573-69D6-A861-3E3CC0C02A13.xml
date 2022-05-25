@@ -1,0 +1,41 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<PackageOracle class="oracle.dbtools.crest.model.design.storage.oracle.PackageOracle" name="MASINI_DETALII_PACK" directorySegmentName="seg_0" id="C4ABDCAC-3573-69D6-A861-3E3CC0C02A13">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-25 14:02:19 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<source>CREATE OR REPLACE PACKAGE MASINI_DETALII_PACK
+IS
+    PROCEDURE ADD_MASINI(   p_nr_inmatriculare in masini.nr_inmatriculare%TYPE,
+                            p_marca in detalii_masini.marca%TYPE,
+                            p_clasa in detalii_masini.clasa%TYPE,
+                            p_an_fabricatie in detalii_masini.an_fabricatie%TYPE,
+                            p_carburant in detalii_masini.carburant%TYPE,
+                            p_culoare in detalii_masini.culoare%TYPE, 
+                            p_transmisie in detalii_masini.transmisie%TYPE, 
+                            p_consum in detalii_masini.consum%TYPE, 
+                            p_tarif in detalii_masini.tarif%TYPE);
+
+END MASINI_DETALII_PACK;
+/
+
+CREATE OR REPLACE PACKAGE BODY MASINI_DETALII_PACK
+IS
+    PROCEDURE ADD_MASINI(   p_nr_inmatriculare in masini.nr_inmatriculare%TYPE,
+                            p_marca in detalii_masini.marca%TYPE,
+                            p_clasa in detalii_masini.clasa%TYPE,
+                            p_an_fabricatie in detalii_masini.an_fabricatie%TYPE,
+                            p_carburant in detalii_masini.carburant%TYPE,
+                            p_culoare in detalii_masini.culoare%TYPE, 
+                            p_transmisie in detalii_masini.transmisie%TYPE, 
+                            p_consum in detalii_masini.consum%TYPE, 
+                            p_tarif in detalii_masini.tarif%TYPE) IS 
+    BEGIN 
+
+        INSERT INTO MASINI VALUES(null, p_nr_inmatriculare, 0);
+        INSERT INTO DETALII_MASINI VALUES(p_marca,p_clasa,p_an_fabricatie,p_carburant,p_culoare,p_transmisie,p_consum,p_tarif,GET_ID_MASINA(p_nr_inmatriculare));
+        COMMIT;
+    END ADD_MASINI;
+
+END MASINI_DETALII_PACK;
+/</source>
+</PackageOracle>

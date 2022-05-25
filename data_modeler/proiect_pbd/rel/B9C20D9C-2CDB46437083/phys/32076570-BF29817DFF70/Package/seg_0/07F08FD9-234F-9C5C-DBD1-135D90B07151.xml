@@ -1,0 +1,50 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<PackageOracle class="oracle.dbtools.crest.model.design.storage.oracle.PackageOracle" name="VIZUALIZARE_PACK" directorySegmentName="seg_0" id="07F08FD9-234F-9C5C-DBD1-135D90B07151">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-25 14:07:19 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<source>CREATE OR REPLACE PACKAGE VIZUALIZARE_PACK IS
+    --afiseaza numele si prenumele impreuna cu masina inchiriata de un anumit client
+    PROCEDURE AFISARE_INCHIRIERE;
+    --afiseaza toate inchirierile efectuate dupa data respectiva
+    PROCEDURE AFISARE_CONTRACTE_DATA(v_data contracte_inchirieri.data_inchiriere%TYPE);
+    --afisarea tuturor masinilor care nu sunt inchiriate
+    PROCEDURE AFISARE_MASINI_DISPONIBILE;
+END VIZUALIZARE_PACK;
+/
+
+
+CREATE OR REPLACE PACKAGE BODY VIZUALIZARE_PACK IS
+    PROCEDURE AFISARE_INCHIRIERE
+    IS 
+        CURSOR c1 IS SELECT DISTINCT nume,prenume,nr_inmatriculare FROM clienti,masini
+                    CROSS JOIN contracte_inchirieri WHERE clienti.id_client=contracte_inchirieri.id_client AND masini.id_masina=contracte_inchirieri.id_masina;
+    BEGIN
+        FOR i IN c1 LOOP
+            DBMS_OUTPUT.PUT_LINE(&apos;Clientul &apos; || i.nume || &apos; &apos; || i.prenume || &apos; a inchiriat masina &apos; || i.nr_inmatriculare );
+        END LOOP;
+    END AFISARE_INCHIRIERE;
+    
+    PROCEDURE AFISARE_CONTRACTE_DATA(v_data contracte_inchirieri.data_inchiriere%TYPE)
+    IS
+        CURSOR c2 IS SELECT masini.nr_inmatriculare,data_inchiriere FROM masini,contracte_inchirieri 
+                            WHERE masini.id_masina = contracte_inchirieri.id_masina AND data_inchiriere&gt;v_data;
+    BEGIN
+        FOR i IN c2 LOOP
+            DBMS_OUTPUT.PUT_LINE(&apos;Masina &apos; || i.nr_inmatriculare || &apos; a fost inchiriata la data &apos; || i.data_inchiriere);
+        END LOOP;
+    END AFISARE_CONTRACTE_DATA;
+    
+    PROCEDURE AFISARE_MASINI_DISPONIBILE
+    IS
+        CURSOR c3 IS SELECT nr_inmatriculare FROM masini 
+                        WHERE id_masina NOT IN (SELECT id_masina FROM contracte_inchirieri WHERE data_retur &gt;= SYSDATE) 
+                        ORDER BY id_masina;
+    BEGIN
+        FOR i IN c3 LOOP
+            DBMS_OUTPUT.PUT_LINE(&apos;Masina &apos; || i.nr_inmatriculare || &apos; nu este inchiriata&apos;);
+        END LOOP;
+    END AFISARE_MASINI_DISPONIBILE;    
+END VIZUALIZARE_PACK;
+/</source>
+</PackageOracle>

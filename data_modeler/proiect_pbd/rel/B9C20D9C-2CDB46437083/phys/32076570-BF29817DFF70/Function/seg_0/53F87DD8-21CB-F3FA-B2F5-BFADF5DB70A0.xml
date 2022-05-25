@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FunctionOracle class="oracle.dbtools.crest.model.design.storage.oracle.FunctionOracle" name="GET_ID_CLIENT" directorySegmentName="seg_0" id="53F87DD8-21CB-F3FA-B2F5-BFADF5DB70A0">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-25 14:01:00 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<source>CREATE OR REPLACE FUNCTION GET_ID_CLIENT (p_nume IN clienti.nume%TYPE, p_prenume IN clienti.prenume%TYPE)
+RETURN NUMBER IS
+     v_id clienti.id_client%TYPE;
+    BEGIN
+        SELECT id_client INTO v_id FROM clienti WHERE nume = p_nume AND prenume = p_prenume;
+    RETURN v_id;
+END GET_ID_CLIENT;</source>
+</FunctionOracle>
