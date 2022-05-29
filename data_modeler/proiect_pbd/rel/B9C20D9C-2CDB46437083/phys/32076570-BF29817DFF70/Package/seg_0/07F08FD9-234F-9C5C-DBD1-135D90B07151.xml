@@ -10,11 +10,14 @@
     PROCEDURE AFISARE_CONTRACTE_DATA(v_data contracte_inchirieri.data_inchiriere%TYPE);
     --afisarea tuturor masinilor care nu sunt inchiriate
     PROCEDURE AFISARE_MASINI_DISPONIBILE;
-END VIZUALIZARE_PACK;
-/
-
-
-CREATE OR REPLACE PACKAGE BODY VIZUALIZARE_PACK IS
+    --afisarea masinilor inchiriate la data curenta
+    PROCEDURE AFISARE_MASINI_INCHIRIATE;
+END VIZUALIZARE_PACK;</source>
+<body class="oracle.dbtools.crest.model.design.storage.oracle.PackageBodyOracle" name="VIZUALIZARE_PACK" id="07F08FD9-234F-9C5C-DBD1-135D90B07151">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-29 10:10:53 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<source>CREATE OR REPLACE PACKAGE BODY VIZUALIZARE_PACK IS
     PROCEDURE AFISARE_INCHIRIERE
     IS 
         CURSOR c1 IS SELECT DISTINCT nume,prenume,nr_inmatriculare FROM clienti,masini
@@ -23,6 +26,11 @@ CREATE OR REPLACE PACKAGE BODY VIZUALIZARE_PACK IS
         FOR i IN c1 LOOP
             DBMS_OUTPUT.PUT_LINE(&apos;Clientul &apos; || i.nume || &apos; &apos; || i.prenume || &apos; a inchiriat masina &apos; || i.nr_inmatriculare );
         END LOOP;
+        EXCEPTION 
+            WHEN NO_DATA_FOUND THEN 
+                DBMS_OUTPUT.PUT_LINE(&apos;SELECT did not return any row&apos;); 
+            WHEN OTHERS THEN 
+                DBMS_OUTPUT.PUT_LINE(&apos;Something else went wrong - &apos; || SQLCODE || &apos; : &apos; || SQLERRM); 
     END AFISARE_INCHIRIERE;
     
     PROCEDURE AFISARE_CONTRACTE_DATA(v_data contracte_inchirieri.data_inchiriere%TYPE)
@@ -33,6 +41,11 @@ CREATE OR REPLACE PACKAGE BODY VIZUALIZARE_PACK IS
         FOR i IN c2 LOOP
             DBMS_OUTPUT.PUT_LINE(&apos;Masina &apos; || i.nr_inmatriculare || &apos; a fost inchiriata la data &apos; || i.data_inchiriere);
         END LOOP;
+        EXCEPTION 
+            WHEN NO_DATA_FOUND THEN 
+                DBMS_OUTPUT.PUT_LINE(&apos;SELECT did not return any row&apos;); 
+             WHEN OTHERS THEN 
+                DBMS_OUTPUT.PUT_LINE(&apos;Something else went wrong - &apos; || SQLCODE || &apos; : &apos; || SQLERRM);
     END AFISARE_CONTRACTE_DATA;
     
     PROCEDURE AFISARE_MASINI_DISPONIBILE
@@ -44,7 +57,27 @@ CREATE OR REPLACE PACKAGE BODY VIZUALIZARE_PACK IS
         FOR i IN c3 LOOP
             DBMS_OUTPUT.PUT_LINE(&apos;Masina &apos; || i.nr_inmatriculare || &apos; nu este inchiriata&apos;);
         END LOOP;
-    END AFISARE_MASINI_DISPONIBILE;    
-END VIZUALIZARE_PACK;
-/</source>
+        EXCEPTION 
+            WHEN NO_DATA_FOUND THEN 
+                DBMS_OUTPUT.PUT_LINE(&apos;SELECT did not return any row&apos;); 
+            WHEN OTHERS THEN 
+                DBMS_OUTPUT.PUT_LINE(&apos;Something else went wrong - &apos; || SQLCODE || &apos; : &apos; || SQLERRM);
+    END AFISARE_MASINI_DISPONIBILE; 
+    
+    PROCEDURE AFISARE_MASINI_INCHIRIATE
+    IS
+        CURSOR c4 IS SELECT * FROM contracte_inchirieri WHERE data_retur &gt; SYSDATE;
+    BEGIN
+        FOR i IN c4 LOOP
+            DBMS_OUTPUT.PUT_LINE(&apos;Masina &apos; || i.id_masina || &apos; este inchiriata de la &apos; || i.data_inchiriere || &apos; pana la &apos;
+            || i.data_retur || &apos; de clientul &apos; || i.id_client || &apos; care are de platit &apos; || i.tarif);
+        END LOOP;
+        EXCEPTION 
+            WHEN NO_DATA_FOUND THEN 
+                DBMS_OUTPUT.PUT_LINE(&apos;SELECT did not return any row&apos;); 
+            WHEN OTHERS THEN 
+                DBMS_OUTPUT.PUT_LINE(&apos;Something else went wrong - &apos; || SQLCODE || &apos; : &apos; || SQLERRM);
+    END AFISARE_MASINI_INCHIRIATE;
+END VIZUALIZARE_PACK;</source>
+</body>
 </PackageOracle>

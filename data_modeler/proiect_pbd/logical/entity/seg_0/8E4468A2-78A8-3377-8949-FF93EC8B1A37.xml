@@ -35,13 +35,9 @@
 <engineerTo>
 <item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
 </engineerTo>
-<constraintName>contracte_data_inchiriere_ck</constraintName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT007</logicalDatatype>
-<checkConstraint>
-<implementationDef dbType="Generic Constraint" definition="TO_CHAR(data_inchiriere, &apos;YYYY-MM-DD&apos;) &gt;= &apos;2020-10-01&apos;"/>
-</checkConstraint>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="data_retur" id="E6D0DAED-D6CB-77AB-C13F-4FD8B91A28CC">
@@ -56,7 +52,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT007</logicalDatatype>
 <checkConstraint>
-<implementationDef dbType="Generic Constraint" definition="data_retur &gt; data_inchiriere and data_retur&lt;add_months(data_inchiriere, 1)"/>
+<implementationDef dbType="Generic Constraint" definition="data_retur &gt; data_inchiriere"/>
 </checkConstraint>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
@@ -67,14 +63,10 @@
 <engineerTo>
 <item key="B9C20D9C-4656-6D7B-18E4-2CDB46437083" value="true"/>
 </engineerTo>
-<constraintName>contracte_inchirieri_tarif_ck</constraintName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
 <dataTypePrecision>4</dataTypePrecision>
-<checkConstraint>
-<implementationDef dbType="Generic Constraint" definition="tarif&gt;10"/>
-</checkConstraint>
 <ownDataTypeParameters>,4,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="id_client" id="2736E488-591B-57A2-0BA3-4C7793F16764">

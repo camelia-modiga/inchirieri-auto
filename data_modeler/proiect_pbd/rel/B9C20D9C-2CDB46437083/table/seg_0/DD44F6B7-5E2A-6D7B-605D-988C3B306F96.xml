@@ -29,13 +29,9 @@
 <createdTime>2022-05-25 13:50:32 UTC</createdTime>
 <generatorID>DADFF600-41C7-CCDD-BC37-5AB02FA72361</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
-<constraintName>contracte_data_inchiriere_ck</constraintName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT007</logicalDatatype>
-<checkConstraint>
-<implementationDef dbType="Generic Constraint" definition="TO_CHAR(data_inchiriere, &apos;YYYY-MM-DD&apos;) &gt;= &apos;2020-10-01&apos;"/>
-</checkConstraint>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
@@ -49,7 +45,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT007</logicalDatatype>
 <checkConstraint>
-<implementationDef dbType="Generic Constraint" definition="data_retur &gt; data_inchiriere and data_retur&lt;add_months(data_inchiriere, 1)"/>
+<implementationDef dbType="Generic Constraint" definition="data_retur &gt; data_inchiriere"/>
 </checkConstraint>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
@@ -59,14 +55,10 @@
 <createdTime>2022-05-25 13:50:32 UTC</createdTime>
 <generatorID>E69488E2-BE8D-8DA9-7097-12D360C8658D</generatorID>
 <ownerDesignName>proiect_pbd</ownerDesignName>
-<constraintName>contracte_inchirieri_tarif_ck</constraintName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
 <dataTypePrecision>4</dataTypePrecision>
-<checkConstraint>
-<implementationDef dbType="Generic Constraint" definition="tarif&gt;10"/>
-</checkConstraint>
 <ownDataTypeParameters>,4,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>

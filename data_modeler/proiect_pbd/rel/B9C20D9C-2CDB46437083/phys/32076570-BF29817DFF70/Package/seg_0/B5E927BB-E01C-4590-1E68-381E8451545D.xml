@@ -14,46 +14,137 @@ IS
                            );
     PROCEDURE UPDATE_DATA_RETUR (
                             p_nr_contract contracte_inchirieri.nr_contract%TYPE,
-                            p_data_retur in contracte_inchirieri.data_retur%TYPE,
+                            p_data_retur in contracte_inchirieri.data_retur%TYPE
+                        );
+    PROCEDURE UPDATE_DATA_INCHIRIERE (
+                            p_nr_contract contracte_inchirieri.nr_contract%TYPE,
+                            p_data_inchiriere in contracte_inchirieri.data_inchiriere%TYPE,
                             p_nr_inmatriculare in masini.nr_inmatriculare%TYPE
-    );
-END CONTRACTE_PACK;
-/
-
-CREATE OR REPLACE PACKAGE BODY CONTRACTE_PACK
+                        );
+END CONTRACTE_PACK;</source>
+<body class="oracle.dbtools.crest.model.design.storage.oracle.PackageBodyOracle" name="CONTRACTE_PACK" id="B5E927BB-E01C-4590-1E68-381E8451545D">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-29 09:41:07 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<source>CREATE OR REPLACE PACKAGE BODY CONTRACTE_PACK
 IS
-        PROCEDURE ADD_CONTRACTE (
+    PROCEDURE ADD_CONTRACTE (
                              p_data_inchiriere in contracte_inchirieri.data_inchiriere%TYPE,
                              p_data_retur in contracte_inchirieri.data_retur%TYPE,
                              p_nume in clienti.nume%TYPE,
                              p_prenume in clienti.prenume%TYPE,
                              p_nr_inmatriculare in masini.nr_inmatriculare%TYPE) IS 
-        v_tarif detalii_masini.tarif%TYPE;
-        v_tarif_calculat contracte_inchirieri.tarif%TYPE := 0;
-       
-        CURSOR c_tarif is 
-            SELECT tarif FROM detalii_masini WHERE id_masina=GET_ID_MASINA(p_nr_inmatriculare);
-    
+        
+    v_tarif detalii_masini.tarif%TYPE;
+    v_tarif_calculat contracte_inchirieri.tarif%TYPE := 0;
+    data_invalida EXCEPTION;
+    data_egala EXCEPTION;
+
+    CURSOR c_tarif is 
+        SELECT tarif FROM detalii_masini WHERE id_masina=GET_ID_MASINA(p_nr_inmatriculare);
+
     BEGIN  
          OPEN c_tarif;
              LOOP 
                 FETCH c_tarif INTO v_tarif;
                 EXIT WHEN c_tarif%NOTFOUND;
                 v_tarif_calculat := (p_data_retur - p_data_inchiriere) * v_tarif;
-                BEGIN 
-                    INSERT INTO contracte_inchirieri VALUES (null, p_data_inchiriere, p_data_retur, v_tarif_calculat, GET_ID_CLIENT(p_nume, p_prenume), GET_ID_MASINA(p_nr_inmatriculare)); 
-                    IF p_data_retur &gt; SYSDATE THEN
-                      UPDATE masini SET status = 1 WHERE id_masina = (SELECT id_masina FROM masini WHERE nr_inmatriculare = p_nr_inmatriculare);
+                BEGIN
+                    IF p_data_retur &lt; p_data_inchiriere THEN
+                        RAISE data_invalida;
+                    ELSIF p_data_retur = p_data_inchiriere THEN
+                        RAISE data_egala;
+                    ELSE
+                        INSERT INTO contracte_inchirieri VALUES (null, p_data_inchiriere, p_data_retur, v_tarif_calculat, GET_ID_CLIENT(p_nume, p_prenume), GET_ID_MASINA(p_nr_inmatriculare)); 
+                        IF p_data_retur &gt; SYSDATE THEN
+                          UPDATE masini SET status = 1 WHERE id_masina = (SELECT id_masina FROM masini WHERE nr_inmatriculare = p_nr_inmatriculare);
+                          IF SQL%ROWCOUNT = 0 THEN
+                              DBMS_OUTPUT.PUT_LINE(&apos;Masina cu numarul de inmatriculare &apos; || p_nr_inmatriculare || &apos; nu exista&apos;);
+                          END IF;
+                        END IF;
                     END IF;
+
+                    EXCEPTION
+                        WHEN NO_DATA_FOUND THEN 
+                            DBMS_OUTPUT.PUT_LINE(&apos;SELECT did not return any row&apos;);
+                        WHEN data_invalida THEN
+                            DBMS_OUTPUT.PUT_LINE(&apos;data_retur trebuie sa fie mai mare decat data_inchiriere&apos;);
+                        WHEN data_egala THEN
+                            DBMS_OUTPUT.PUT_LINE(&apos;Masina poate fi inchiriata minim o zi&apos;);
+                        WHEN OTHERS THEN 
+                            DBMS_OUTPUT.PUT_LINE(&apos;Something else went wrong - &apos; || SQLCODE || &apos; : &apos; || SQLERRM);
                 END;
              END LOOP; 
          CLOSE c_tarif; 
     END ADD_CONTRACTE;
+
+    PROCEDURE UPDATE_DATA_RETUR(p_nr_contract contracte_inchirieri.nr_contract%TYPE,
+                                p_data_retur in contracte_inchirieri.data_retur%TYPE) IS
+
+    ultima_data_retur contracte_inchirieri.data_retur%TYPE;
+    numar_inchirieri NUMBER;
+    v_numar_contract contracte_inchirieri.nr_contract%TYPE;
+    masina_inchiriata EXCEPTION;
+    v_tarif detalii_masini.tarif%TYPE;
+    v_tarif_calculat contracte_inchirieri.tarif%TYPE := 0;
+    data_invalida EXCEPTION;
+    v_data_inchiriere contracte_inchirieri.data_inchiriere%TYPE;
+    ultima_data_inchiriere contracte_inchirieri.data_inchiriere%TYPE;
     
-    PROCEDURE UPDATE_DATA_RETUR (
-                            p_nr_contract contracte_inchirieri.nr_contract%TYPE,
-                            p_data_retur in contracte_inchirieri.data_retur%TYPE,
-                            p_nr_inmatriculare in masini.nr_inmatriculare%TYPE) IS
+    CURSOR c_tarif is 
+        SELECT tarif FROM detalii_masini WHERE id_masina = GET_ID_MASINA_CONTRACTE(p_nr_contract);
+
+    BEGIN
+        SELECT MAX(data_inchiriere) INTO ultima_data_inchiriere FROM contracte_inchirieri WHERE id_masina = GET_ID_MASINA_CONTRACTE(p_nr_contract);
+        SELECT MAX(data_retur) INTO ultima_data_retur FROM contracte_inchirieri WHERE id_masina = GET_ID_MASINA_CONTRACTE(p_nr_contract);
+        SELECT COUNT(*) INTO numar_inchirieri FROM contracte_inchirieri WHERE id_masina = GET_ID_MASINA_CONTRACTE(p_nr_contract);
+        SELECT nr_contract INTO v_numar_contract FROM contracte_inchirieri WHERE data_retur = ultima_data_retur ORDER BY nr_contract DESC;
+        SELECT data_inchiriere INTO v_data_inchiriere FROM contracte_inchirieri WHERE id_masina = GET_ID_MASINA_CONTRACTE(p_nr_contract)
+                                                                                    AND nr_contract = p_nr_contract;
+        OPEN c_tarif;
+            LOOP
+                FETCH c_tarif INTO v_tarif;
+                EXIT WHEN c_tarif%NOTFOUND;
+                BEGIN
+                    IF p_data_retur &lt; v_data_inchiriere THEN
+                        RAISE data_invalida;
+                    ELSE
+                        v_tarif_calculat := (p_data_retur - v_data_inchiriere) * v_tarif;
+                        IF numar_inchirieri = 1 THEN 
+                            UPDATE contracte_inchirieri SET data_retur = p_data_retur,tarif = v_tarif_calculat WHERE nr_contract = p_nr_contract;
+                        END IF;
+
+                        IF numar_inchirieri &gt; 1 THEN
+                            IF p_nr_contract = v_numar_contract THEN
+                                UPDATE contracte_inchirieri SET data_retur = p_data_retur,tarif = v_tarif_calculat WHERE nr_contract = p_nr_contract;
+                            END IF;
+                            IF p_data_retur &lt; ultima_data_inchiriere THEN
+                                UPDATE contracte_inchirieri SET data_retur = p_data_retur,tarif = v_tarif_calculat WHERE nr_contract = p_nr_contract;
+                            ELSE 
+                                RAISE masina_inchiriata;
+                            END IF; 
+                        END IF;
+                    END IF;
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        DBMS_OUTPUT.PUT_LINE(&apos;SELECT did not return any row&apos;);
+                    WHEN masina_inchiriata THEN
+                        DBMS_OUTPUT.PUT_LINE(&apos;Masina este deja inchiriata pana la data &apos; || ultima_data_retur);
+                    WHEN data_invalida THEN
+                          DBMS_OUTPUT.PUT_LINE(&apos;data_retur trebuie sa fie mai mare decat data_inchiriere&apos;);
+                    WHEN OTHERS THEN 
+                          DBMS_OUTPUT.PUT_LINE(&apos;Something else went wrong - &apos; || SQLCODE || &apos; : &apos; || SQLERRM);
+                END;
+            END LOOP;
+        CLOSE c_tarif;
+    END UPDATE_DATA_RETUR;
+
+
+
+    PROCEDURE UPDATE_DATA_INCHIRIERE(p_nr_contract contracte_inchirieri.nr_contract%TYPE,
+                                p_data_inchiriere in contracte_inchirieri.data_inchiriere%TYPE,
+                                p_nr_inmatriculare in masini.nr_inmatriculare%TYPE) IS
+
     ultima_data_retur contracte_inchirieri.data_retur%TYPE;
     ultima_data_inchiriere contracte_inchirieri.data_inchiriere%TYPE;
     numar_inchirieri NUMBER;
@@ -61,41 +152,62 @@ IS
     masina_inchiriata EXCEPTION;
     v_tarif detalii_masini.tarif%TYPE;
     v_tarif_calculat contracte_inchirieri.tarif%TYPE := 0;
-       
+    data_invalida EXCEPTION;
+    data_comparare contracte_inchirieri.data_retur%TYPE;
+
+    v_data_retur contracte_inchirieri.data_retur%TYPE;
+
     CURSOR c_tarif is 
-        SELECT tarif FROM detalii_masini WHERE id_masina=GET_ID_MASINA(p_nr_inmatriculare);
-        
+        SELECT tarif FROM detalii_masini WHERE id_masina = GET_ID_MASINA_CONTRACTE(p_nr_contract);
+
     BEGIN
-        SELECT MAX(data_retur) INTO ultima_data_retur FROM contracte_inchirieri WHERE id_masina = GET_ID_MASINA(p_nr_inmatriculare);
-        SELECT MAX(data_inchiriere) INTO ultima_data_inchiriere FROM contracte_inchirieri WHERE id_masina = GET_ID_MASINA(p_nr_inmatriculare);
-        SELECT COUNT(*) INTO numar_inchirieri FROM contracte_inchirieri WHERE id_masina = GET_ID_MASINA(p_nr_inmatriculare);
+        SELECT MAX(data_retur) INTO ultima_data_retur FROM contracte_inchirieri WHERE id_masina = GET_ID_MASINA_CONTRACTE(p_nr_contract);
+        SELECT MAX(data_inchiriere) INTO ultima_data_inchiriere FROM contracte_inchirieri WHERE id_masina = GET_ID_MASINA_CONTRACTE(p_nr_contract);
+        SELECT COUNT(*) INTO numar_inchirieri FROM contracte_inchirieri WHERE id_masina = GET_ID_MASINA_CONTRACTE(p_nr_contract);
         SELECT nr_contract INTO v_numar_contract FROM contracte_inchirieri WHERE data_retur = ultima_data_retur ORDER BY nr_contract DESC;
+
+        SELECT MAX(data_retur) INTO data_comparare FROM contracte_inchirieri WHERE data_retur IN
+                    (SELECT data_retur FROM contracte_inchirieri MINUS SELECT MAX(data_retur) 
+                        FROM contracte_inchirieri WHERE id_masina = GET_ID_MASINA(p_nr_inmatriculare));
+
+        SELECT data_retur INTO v_data_retur FROM contracte_inchirieri WHERE id_masina = GET_ID_MASINA_CONTRACTE(p_nr_contract)
+                                                                                        AND nr_contract = v_numar_contract;
+
         OPEN c_tarif;
             LOOP
                 FETCH c_tarif INTO v_tarif;
                 EXIT WHEN c_tarif%NOTFOUND;
-                v_tarif_calculat := (p_data_retur - ultima_data_inchiriere) * v_tarif;
                 BEGIN
-                    IF numar_inchirieri = 1 THEN 
-                        UPDATE contracte_inchirieri SET data_retur = p_data_retur,tarif = v_tarif_calculat WHERE nr_contract = p_nr_contract;
-                    END IF;
-                    IF numar_inchirieri &gt; 1 THEN
-                        IF p_nr_contract = v_numar_contract THEN
-                            UPDATE contracte_inchirieri SET data_retur = p_data_retur,tarif = v_tarif_calculat WHERE nr_contract = p_nr_contract;
+                    IF v_data_retur &lt; p_data_inchiriere THEN
+                        RAISE data_invalida;
+                    ELSE
+                        v_tarif_calculat := (v_data_retur - p_data_inchiriere) * v_tarif;
+                        IF numar_inchirieri = 1 THEN 
+                            UPDATE contracte_inchirieri SET data_inchiriere = p_data_inchiriere, tarif = v_tarif_calculat WHERE nr_contract = p_nr_contract;
                         END IF;
-                        IF p_data_retur &gt; ultima_data_retur THEN 
-                            UPDATE contracte_inchirieri SET data_retur = p_data_retur,tarif = v_tarif_calculat WHERE nr_contract = p_nr_contract;
-                        ELSE 
-                            RAISE masina_inchiriata;
-                        END IF; 
+
+                        IF numar_inchirieri &gt; 1 THEN
+                            IF p_data_inchiriere &lt; data_comparare THEN
+                                RAISE masina_inchiriata;
+                            ELSE 
+                                UPDATE contracte_inchirieri SET data_inchiriere = p_data_inchiriere, tarif = v_tarif_calculat WHERE nr_contract = p_nr_contract;
+                            END IF; 
+                        END IF;
                     END IF;
-                EXCEPTION WHEN masina_inchiriata THEN
-                    dbms_output.put_line(&apos;Masina este deja inchiriata pana la data &apos; || ultima_data_retur);
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        DBMS_OUTPUT.PUT_LINE(&apos;SELECT did not return any row&apos;);
+                    WHEN masina_inchiriata THEN
+                        DBMS_OUTPUT.PUT_LINE(&apos;Masina este deja inchiriata incepand cu &apos; || ultima_data_inchiriere);
+                    WHEN data_invalida THEN
+                          DBMS_OUTPUT.PUT_LINE(&apos;data_retur trebuie sa fie mai mare decat data_inchiriere&apos;);
+                    WHEN OTHERS THEN 
+                          DBMS_OUTPUT.PUT_LINE(&apos;Something else went wrong - &apos; || SQLCODE || &apos; : &apos; || SQLERRM);
                 END;
             END LOOP;
         CLOSE c_tarif;
-    END UPDATE_DATA_RETUR;
-                        
-END CONTRACTE_PACK;
-/</source>
+    END UPDATE_DATA_INCHIRIERE;
+
+END CONTRACTE_PACK;</source>
+</body>
 </PackageOracle>

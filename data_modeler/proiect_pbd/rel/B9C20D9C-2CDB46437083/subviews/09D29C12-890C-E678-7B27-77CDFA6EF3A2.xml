@@ -38,7 +38,7 @@
 <lineWidth>1</lineWidth>
 <centerLabel class="oracle.dbtools.crest.model.design.Label">
 <site>1</site>
-<labelBounds x="-247" y="-46" width="165" height="30"/>
+<labelBounds x="-411" y="-76" width="165" height="30"/>
 <noBackgroundColor>true</noBackgroundColor>
 <noForegroundColor>true</noForegroundColor>
 </centerLabel>
@@ -53,7 +53,7 @@
 <lineWidth>1</lineWidth>
 <centerLabel class="oracle.dbtools.crest.model.design.Label">
 <site>1</site>
-<labelBounds x="-208" y="-46" width="139" height="30"/>
+<labelBounds x="-346" y="-76" width="139" height="30"/>
 <noBackgroundColor>true</noBackgroundColor>
 <noForegroundColor>true</noForegroundColor>
 </centerLabel>
@@ -68,7 +68,7 @@
 <lineWidth>1</lineWidth>
 <centerLabel class="oracle.dbtools.crest.model.design.Label">
 <site>1</site>
-<labelBounds x="-247" y="-46" width="165" height="30"/>
+<labelBounds x="-411" y="-76" width="165" height="30"/>
 <noBackgroundColor>true</noBackgroundColor>
 <noForegroundColor>true</noForegroundColor>
 </centerLabel>

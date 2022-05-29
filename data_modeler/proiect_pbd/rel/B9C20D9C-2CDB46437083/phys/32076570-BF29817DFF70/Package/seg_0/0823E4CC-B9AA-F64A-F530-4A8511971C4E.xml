@@ -13,12 +13,20 @@ IS
                            p_nr_telefon in clienti.nr_telefon%TYPE,
                            p_data_obt_permis in clienti.data_obt_permis%TYPE, 
                            p_data_nasterii in clienti.data_nasterii%TYPE);
-END CLIENTI_PACK;
-/
-
-CREATE OR REPLACE PACKAGE BODY CLIENTI_PACK
+                           
+   PROCEDURE UPDATE_CLIENTI_TELEFON (p_nr_telefon in clienti.nr_telefon%TYPE,
+                                      p_id_client in clienti.id_client%TYPE);
+    
+    PROCEDURE UPDATE_CLIENTI_EMAIL (p_email in clienti.email%TYPE,
+                                    p_id_client in clienti.id_client%TYPE);
+END CLIENTI_PACK;</source>
+<body class="oracle.dbtools.crest.model.design.storage.oracle.PackageBodyOracle" name="CLIENTI_PACK" id="0823E4CC-B9AA-F64A-F530-4A8511971C4E">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-29 08:57:06 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<source>CREATE OR REPLACE PACKAGE BODY CLIENTI_PACK
 IS
-        PROCEDURE ADD_CLIENTI (p_serie_act_identitate in clienti.serie_act_identitate%TYPE, 
+    PROCEDURE ADD_CLIENTI (p_serie_act_identitate in clienti.serie_act_identitate%TYPE, 
                            p_tip_act in clienti.tip_act%TYPE, 
                            p_nume in clienti.nume%TYPE, 
                            p_prenume in clienti.prenume%TYPE, 
@@ -26,10 +34,71 @@ IS
                            p_nr_telefon in clienti.nr_telefon%TYPE,
                            p_data_obt_permis in clienti.data_obt_permis%TYPE, 
                            p_data_nasterii in clienti.data_nasterii%TYPE) IS 
+    
+    CHECK_CONSTRAINT_VIOLATED EXCEPTION;
+    PRAGMA EXCEPTION_INIT(CHECK_CONSTRAINT_VIOLATED, -2290);
+    
+    UNIQUE_CONSTRAINT_VIOLATED EXCEPTION;
+    PRAGMA EXCEPTION_INIT(UNIQUE_CONSTRAINT_VIOLATED, -00001);
+    
     BEGIN  
         INSERT INTO CLIENTI VALUES(null, p_serie_act_identitate, p_tip_act, p_nume, p_prenume, p_email, p_nr_telefon, p_data_obt_permis, p_data_nasterii);
+        
+        EXCEPTION
+            WHEN CHECK_CONSTRAINT_VIOLATED THEN
+                DBMS_OUTPUT.PUT_LINE(&apos;INSERT failed due to check constraint violation&apos;);
+            WHEN UNIQUE_CONSTRAINT_VIOLATED THEN
+                DBMS_OUTPUT.PUT_LINE(&apos;INSERT failed due to unique constraint violation&apos;);
+            WHEN OTHERS THEN 
+                DBMS_OUTPUT.PUT_LINE(&apos;Something else went wrong - &apos; || SQLCODE || &apos; : &apos; || SQLERRM);
     END ADD_CLIENTI;
     
-END CLIENTI_PACK;
-/</source>
+    PROCEDURE UPDATE_CLIENTI_TELEFON (p_nr_telefon in clienti.nr_telefon%TYPE,
+                                      p_id_client in clienti.id_client%TYPE) IS
+    
+    CHECK_CONSTRAINT_VIOLATED EXCEPTION;
+    PRAGMA EXCEPTION_INIT(CHECK_CONSTRAINT_VIOLATED, -2290);
+    
+    UNIQUE_CONSTRAINT_VIOLATED EXCEPTION;
+    PRAGMA EXCEPTION_INIT(UNIQUE_CONSTRAINT_VIOLATED, -00001);
+    
+    BEGIN
+        UPDATE clienti SET nr_telefon = p_nr_telefon WHERE id_client = p_id_client;
+        IF SQL%ROWCOUNT = 0 THEN
+            DBMS_OUTPUT.PUT_LINE(&apos;Clientul &apos; || p_id_client || &apos; nu exista&apos;);
+        END IF;
+        EXCEPTION
+            WHEN UNIQUE_CONSTRAINT_VIOLATED THEN
+                DBMS_OUTPUT.PUT_LINE(&apos;Numarul de telefon al clientului trebuie sa fie unic&apos;);
+            WHEN CHECK_CONSTRAINT_VIOLATED THEN
+                DBMS_OUTPUT.PUT_LINE(&apos;Formatul pentru numarul de telefon nu este respectat&apos;);
+            WHEN OTHERS THEN 
+                DBMS_OUTPUT.PUT_LINE(&apos;Something else went wrong - &apos; || SQLCODE || &apos; : &apos; || SQLERRM);
+    END UPDATE_CLIENTI_TELEFON;
+    
+    PROCEDURE UPDATE_CLIENTI_EMAIL (p_email in clienti.email%TYPE,
+                                    p_id_client in clienti.id_client%TYPE) IS
+    
+    UNIQUE_CONSTRAINT_VIOLATED EXCEPTION;
+    PRAGMA EXCEPTION_INIT(UNIQUE_CONSTRAINT_VIOLATED, -00001);
+    
+    CHECK_CONSTRAINT_VIOLATED EXCEPTION;
+    PRAGMA EXCEPTION_INIT(CHECK_CONSTRAINT_VIOLATED, -2290);
+    
+    BEGIN
+        UPDATE clienti SET email = p_email WHERE id_client = p_id_client;
+        IF SQL%ROWCOUNT = 0 THEN
+            DBMS_OUTPUT.PUT_LINE(&apos;Clientul &apos; || p_id_client || &apos; nu exista&apos;);
+        END IF;
+         EXCEPTION
+            WHEN UNIQUE_CONSTRAINT_VIOLATED THEN
+                DBMS_OUTPUT.PUT_LINE(&apos;Emailul clientului trebuie sa fie unic&apos;);
+            WHEN CHECK_CONSTRAINT_VIOLATED THEN
+                DBMS_OUTPUT.PUT_LINE(&apos;Formatul pentru email nu este respectat&apos;);
+            WHEN OTHERS THEN 
+                DBMS_OUTPUT.PUT_LINE(&apos;Something else went wrong - &apos; || SQLCODE || &apos; : &apos; || SQLERRM);
+    END UPDATE_CLIENTI_EMAIL;
+    
+END CLIENTI_PACK;</source>
+</body>
 </PackageOracle>

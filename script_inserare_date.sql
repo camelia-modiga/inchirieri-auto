@@ -48,12 +48,9 @@ END;
 
 --inserare date in tabela contacte_inchirieri
 BEGIN
-    CONTRACTE_PACK.ADD_CONTRACTE(to_date('02.02.2022','DD.MM.YYYY'),to_date('17.02.2022','DD.MM.YYYY'),'Pavel','Maria','IS 02 RNT');
+    CONTRACTE_PACK.ADD_CONTRACTE(to_date('02.05.2022','DD.MM.YYYY'),to_date('17.05.2022','DD.MM.YYYY'),'Pavel','Maria','IS 02 RNT');
     CONTRACTE_PACK.ADD_CONTRACTE(to_date('29.04.2022','DD.MM.YYYY'),to_date('06.05.2022','DD.MM.YYYY'),'Marinescu','Ioana','IS 03 RNT');
-    CONTRACTE_PACK.ADD_CONTRACTE(to_date('01.04.2022','DD.MM.YYYY'),to_date('04.04.2022','DD.MM.YYYY'),'Cristea','Alexandru','IS 05 RNT');
-    CONTRACTE_PACK.ADD_CONTRACTE(to_date('02.04.2022','DD.MM.YYYY'),to_date('17.04.2022','DD.MM.YYYY'),'Alexandrescu','Cristina','IS 11 RNT');
-    CONTRACTE_PACK.ADD_CONTRACTE(to_date('29.04.2022','DD.MM.YYYY'),to_date('17.05.2022','DD.MM.YYYY'),'Morosanu','Dan','IS 08 RNT');
-    CONTRACTE_PACK.ADD_CONTRACTE(to_date('13.03.2022','DD.MM.YYYY'),to_date('15.03.2022','DD.MM.YYYY'),'Popa','Andrei','IS 06 RNT');
-    CONTRACTE_PACK.ADD_CONTRACTE(to_date('25.05.2022','DD.MM.YYYY'),to_date('27.05.2022','DD.MM.YYYY'),'Morosanu','Dan','IS 12 RNT');
+    CONTRACTE_PACK.ADD_CONTRACTE(to_date('01.05.2022','DD.MM.YYYY'),to_date('04.05.2022','DD.MM.YYYY'),'Cristea','Alexandru','IS 05 RNT');
+    CONTRACTE_PACK.ADD_CONTRACTE(to_date('31.05.2022','DD.MM.YYYY'),to_date('06.06.2022','DD.MM.YYYY'),'Morosanu','Dan','IS 12 RNT');
 END;
 /

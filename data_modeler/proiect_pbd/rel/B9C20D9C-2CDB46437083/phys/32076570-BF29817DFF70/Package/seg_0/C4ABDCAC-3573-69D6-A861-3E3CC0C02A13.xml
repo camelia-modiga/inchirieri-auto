@@ -14,11 +14,15 @@ IS
                             p_transmisie in detalii_masini.transmisie%TYPE, 
                             p_consum in detalii_masini.consum%TYPE, 
                             p_tarif in detalii_masini.tarif%TYPE);
+    PROCEDURE UPDATE_MASINI_TARIF ( p_nr_inmatriculare in masini.nr_inmatriculare%TYPE,
+                                    p_tarif in detalii_masini.tarif%TYPE);
 
-END MASINI_DETALII_PACK;
-/
-
-CREATE OR REPLACE PACKAGE BODY MASINI_DETALII_PACK
+END MASINI_DETALII_PACK;</source>
+<body class="oracle.dbtools.crest.model.design.storage.oracle.PackageBodyOracle" name="MASINI_DETALII_PACK" id="C4ABDCAC-3573-69D6-A861-3E3CC0C02A13">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-29 09:13:00 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<source>CREATE OR REPLACE PACKAGE BODY MASINI_DETALII_PACK
 IS
     PROCEDURE ADD_MASINI(   p_nr_inmatriculare in masini.nr_inmatriculare%TYPE,
                             p_marca in detalii_masini.marca%TYPE,
@@ -29,13 +33,36 @@ IS
                             p_transmisie in detalii_masini.transmisie%TYPE, 
                             p_consum in detalii_masini.consum%TYPE, 
                             p_tarif in detalii_masini.tarif%TYPE) IS 
+    
+    CHECK_CONSTRAINT_VIOLATED EXCEPTION;
+    PRAGMA EXCEPTION_INIT(CHECK_CONSTRAINT_VIOLATED, -2290);
+    
+    UNIQUE_CONSTRAINT_VIOLATED EXCEPTION;
+    PRAGMA EXCEPTION_INIT(UNIQUE_CONSTRAINT_VIOLATED, -00001);
+    
     BEGIN 
 
         INSERT INTO MASINI VALUES(null, p_nr_inmatriculare, 0);
         INSERT INTO DETALII_MASINI VALUES(p_marca,p_clasa,p_an_fabricatie,p_carburant,p_culoare,p_transmisie,p_consum,p_tarif,GET_ID_MASINA(p_nr_inmatriculare));
         COMMIT;
+        EXCEPTION
+            WHEN CHECK_CONSTRAINT_VIOLATED THEN
+                DBMS_OUTPUT.PUT_LINE(&apos;INSERT failed due to check constraint violation&apos;);
+            WHEN UNIQUE_CONSTRAINT_VIOLATED THEN
+                DBMS_OUTPUT.PUT_LINE(&apos;INSERT failed due to unique constraint violation&apos;);
+            WHEN OTHERS THEN 
+                DBMS_OUTPUT.PUT_LINE(&apos;Something else went wrong - &apos; || SQLCODE || &apos; : &apos; || SQLERRM);
     END ADD_MASINI;
+    
+    PROCEDURE UPDATE_MASINI_TARIF ( p_nr_inmatriculare in masini.nr_inmatriculare%TYPE,
+                                    p_tarif in detalii_masini.tarif%TYPE) IS
+    BEGIN
+         UPDATE detalii_masini SET tarif = p_tarif WHERE id_masina = GET_ID_MASINA(p_nr_inmatriculare);
+         IF SQL%ROWCOUNT = 0 THEN
+            DBMS_OUTPUT.PUT_LINE(&apos;Masina cu numarul de inmatriculare &apos; || p_nr_inmatriculare || &apos; nu exista&apos;);
+        END IF;
+    END UPDATE_MASINI_TARIF;
 
-END MASINI_DETALII_PACK;
-/</source>
+END MASINI_DETALII_PACK;</source>
+</body>
 </PackageOracle>
