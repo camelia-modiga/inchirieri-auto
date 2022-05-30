@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="delete_masini_trg" directorySegmentName="seg_0" id="6379E545-694C-FB2F-5598-2F7E8E538D0A">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-30 07:44:03 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<actions>DELETE</actions>
+<body><![CDATA[DECLARE
+v_nr_masini NUMBER(20);
+BEGIN 
+    SELECT COUNT(*) INTO v_nr_masini FROM contracte_inchirieri WHERE id_masina=:old.id_masina;
+    IF v_nr_masini>0
+    THEN
+       RAISE_APPLICATION_ERROR(-20200, 'Masina nu poate fi stearsa pentru ca este inchiriata.');
+    END IF;
+    EXCEPTION 
+    		WHEN NO_DATA_FOUND THEN 
+    			DBMS_OUTPUT.PUT_LINE('No data found');
+END;]]></body>
+<triggerTime>BEFORE</triggerTime>
+<table>CD287154-B2E5-D885-7A0E-9840ED1BEA4F</table>
+</TriggerOraclev10g>

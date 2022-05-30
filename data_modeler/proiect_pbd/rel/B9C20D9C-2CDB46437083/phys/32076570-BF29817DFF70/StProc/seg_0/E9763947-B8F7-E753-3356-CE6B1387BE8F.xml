@@ -4,10 +4,17 @@
 <createdTime>2022-05-25 14:08:09 UTC</createdTime>
 <ownerDesignName>proiect_pbd</ownerDesignName>
 <source>CREATE OR REPLACE PROCEDURE DELETE_MASINI (p_nr_inmatriculare in masini.nr_inmatriculare%TYPE)  AS 
+    INTEGRITY_CONSTRAINT_VIOLATED EXCEPTION;
+    PRAGMA EXCEPTION_INIT(INTEGRITY_CONSTRAINT_VIOLATED, -02292);
 BEGIN
     DELETE FROM MASINI WHERE nr_inmatriculare=p_nr_inmatriculare;
     IF SQL%NOTFOUND THEN
           dbms_output.put_line(&apos;Nu exista masina cu numarul de inmatriculare &apos; || p_nr_inmatriculare);
     END IF;
+    EXCEPTION
+        WHEN INTEGRITY_CONSTRAINT_VIOLATED THEN
+              DBMS_OUTPUT.PUT_LINE(&apos;DELETE failed due to integrity constraint violation&apos;);
+        WHEN OTHERS THEN 
+              DBMS_OUTPUT.PUT_LINE(&apos;Something else went wrong - &apos; || SQLCODE || &apos; : &apos; || SQLERRM);
 END;</source>
 </StoredProcedureOraclev10g>

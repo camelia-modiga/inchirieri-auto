@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="delete_clienti_trg" directorySegmentName="seg_0" id="BC7252F9-989C-BB46-1019-7502867B63B0">
+<createdBy>modig</createdBy>
+<createdTime>2022-05-30 07:40:56 UTC</createdTime>
+<ownerDesignName>proiect_pbd</ownerDesignName>
+<actions>DELETE</actions>
+<body><![CDATA[DECLARE
+v_nr_clienti NUMBER(20);
+BEGIN 
+    SELECT COUNT(*) INTO v_nr_clienti FROM contracte_inchirieri WHERE id_client=:old.id_client;
+    IF v_nr_clienti>0
+    THEN
+        RAISE_APPLICATION_ERROR(-20200, 'Clientul nu poate fi sters pentru ca are o masina inchiriata.');
+    END IF;
+    EXCEPTION 
+    		WHEN NO_DATA_FOUND THEN 
+    			DBMS_OUTPUT.PUT_LINE('No data found');
+END;]]></body>
+<triggerTime>BEFORE</triggerTime>
+<table>D23C7F4C-431B-71B5-35A7-372A171B88AA</table>
+</TriggerOraclev10g>
